@@ -1,10 +1,9 @@
-
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -17,7 +16,7 @@ public class PurchaseForm extends Application{
     private Label labelModeloRoupa = new Label("Camisa Polo");
     private Label labelValor = new Label("R$ 59,90");
     
-    private ComboBox<String> comboBoxQuantidade = new ComboBox<>();
+    private Spinner<String> spinnerQuantidade = new Spinner<>(1, Integer.MAX_VALUE, 1);
     private ComboBox<String> comboBoxFormadePagamento = new ComboBox<>();
     
     private Button buttonComprar = new Button("Comprar");
@@ -32,7 +31,7 @@ public class PurchaseForm extends Application{
         stage.show();
 
         pane.getChildren().addAll(labelItem, labelQuantidade, labelTotal, labelFormadePagamento,
-        		labelModeloRoupa, labelValor, comboBoxQuantidade, comboBoxFormadePagamento, buttonComprar);
+        		labelModeloRoupa, labelValor, spinnerQuantidade, comboBoxFormadePagamento, buttonComprar);
         
         //Item
         labelItem.relocate(20,20);
@@ -41,10 +40,10 @@ public class PurchaseForm extends Application{
         
         //Quantidade
         labelQuantidade.relocate(320,50);
-       	comboBoxQuantidade.relocate(470, 50);
-       	comboBoxQuantidade.setMinWidth(110);
-       	comboBoxQuantidade.setMaxWidth(110);
-       	comboBoxQuantidade.getItems().addAll("1", "2", "3");
+       	spinnerQuantidade.relocate(470, 50);
+       	spinnerQuantidade.setMinWidth(110);
+       	spinnerQuantidade.setMaxWidth(110);
+       	spinnerQuantidade.setEditable(true);
         
         //Total
         labelTotal.relocate(20,150);
