@@ -6,8 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class LoginBoundary extends Application {
 
@@ -20,6 +25,12 @@ public class LoginBoundary extends Application {
     private Button buttonCadastrar = new Button("Cadastrar");
     private Button buttonAcessar = new Button("Acessar");
 
+    private Image image = new Image(new FileInputStream(System.getProperty("user.dir") +"/images/key-icon.png"), 128, 128, false , false);
+    private ImageView imageView = new ImageView(image);
+
+    public LoginBoundary() throws FileNotFoundException {
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -30,7 +41,9 @@ public class LoginBoundary extends Application {
 
         pane.getChildren().addAll(labelEmail, labelSenha,
                 textFieldEmail, textFieldSenha,
-                buttonCadastrar, buttonAcessar);
+                buttonCadastrar, buttonAcessar, imageView);
+
+        imageView.relocate(39, 55);
 
         labelEmail.relocate(203,70);
         textFieldEmail.setMinSize(202, 24);
