@@ -9,7 +9,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class PurchaseForm extends Application{
+public class CompraBoundary extends Application{
 
 	private Label labelItem = new Label("Item");
 	private Label labelQuantidade = new Label("Quantidade");
@@ -66,6 +66,6 @@ public class PurchaseForm extends Application{
     }
 
     public static void main(String[] args) {
-        Application.launch(PurchaseForm.class, args);
+        Application.launch(CompraBoundary.class, args);
     }
 }

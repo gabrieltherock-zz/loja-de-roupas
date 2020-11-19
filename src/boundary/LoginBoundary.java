@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class LoginForm extends Application {
+public class LoginBoundary extends Application {
 
     private Label labelEmail = new Label("E-mail");
     private Label labelSenha = new Label("Senha");
@@ -55,6 +55,6 @@ public class LoginForm extends Application {
     }
 
     public static void main(String[] args) {
-        Application.launch(LoginForm.class, args);
+        Application.launch(LoginBoundary.class, args);
     }
 }

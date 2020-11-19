@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class RegisterForm extends Application{
+public class CadastroBoundary extends Application{
 
 	private Label labelNome = new Label("Nome");
 	private Label labelCpf = new Label("CPF");
@@ -100,7 +100,7 @@ public class RegisterForm extends Application{
     }
 
     public static void main(String[] args) {
-        Application.launch(RegisterForm.class, args);
+        Application.launch(CadastroBoundary.class, args);
     }
 }
 
