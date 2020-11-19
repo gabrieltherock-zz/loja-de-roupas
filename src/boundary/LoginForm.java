@@ -1,3 +1,6 @@
+package boundary;
+
+import controller.DatabaseController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,6 +22,9 @@ public class LoginForm extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        DatabaseController dc = new DatabaseController();
+
         Pane pane = new Pane();
         Scene scene = new Scene(pane, 469, 350);
 

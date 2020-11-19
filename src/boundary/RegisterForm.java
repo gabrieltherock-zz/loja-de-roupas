@@ -1,4 +1,4 @@
-
+package boundary;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -18,7 +18,7 @@ public class RegisterForm extends Application{
     private Label labelCep = new Label("CEP");
     private Label labelLogradouro = new Label("Logradouro");
     private Label labelRua = new Label("Rua");
-    private Label labelReferencia = new Label("Ponto de referência");
+    private Label labelReferencia = new Label("Ponto de referï¿½ncia");
     
     private TextField textFieldNome = new TextField();
     private TextField textFieldCpf = new TextField();

@@ -1,3 +1,5 @@
+package boundary;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -55,7 +57,7 @@ public class PurchaseForm extends Application{
         comboBoxFormadePagamento.relocate(470, 150);
         comboBoxFormadePagamento.setMinWidth(110);
         comboBoxFormadePagamento.setMaxWidth(110);
-        comboBoxFormadePagamento.getItems().addAll("Boleto", "Débito", "Crédito");
+        comboBoxFormadePagamento.getItems().addAll("Boleto", "Dï¿½bito", "Crï¿½dito");
                 
         buttonComprar.setMinSize(220, 15);
         buttonComprar.setStyle("-fx-font-size:20");
