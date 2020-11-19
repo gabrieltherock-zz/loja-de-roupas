@@ -37,6 +37,7 @@ create table roupas (
 	TECID int not null,
 	SID int not null,
 	QUANTIDADE int not null,
+	MODELO varchar(40) not null,
 	MARCA varchar(20) not null,
 	COR varchar(20) not null,
 	DESCRICAO varchar(100) not null,
@@ -77,13 +78,13 @@ insert into tamanhos (TAMANHO) values
 ('PP'), ('P'), ('M'), ('G'), ('GG');
 
 insert into tecidos (TECIDO) values
-('Algodão orgânico'), ('Cânhamo'), ('Fibra de bananeira'), ('Fibra de laranja'), ('Fibra de soja'), ('Lenpur'), ('Linho'), ('Liocel'), ('Modal'), ('Piñatex'), ('Poliamida biodegradável'), ('Qmilk');
+('AlgodÃ£o orgÃ¢nico'), ('CÃ¢nhamo'), ('Fibra de bananeira'), ('Fibra de laranja'), ('Fibra de soja'), ('Lenpur'), ('Linho'), ('Liocel'), ('Modal'), ('PiÃ±atex'), ('Poliamida biodegradÃ¡vel'), ('Qmilk');
 
 insert into sexos (SEXO) values
 ('Masculino'), ('Feminino'), ('Unissex');
 
-insert into roupas (TAMID, TECID, SID, QUANTIDADE, MARCA, COR, DESCRICAO, VALOR) values
-(1, 1, 1, 60, 'Nike', 'Azul', 'Uma bela calca. Ecologica e agradavel de usar!', 99);
+insert into roupas (TAMID, TECID, SID, QUANTIDADE, MODELO, MARCA, COR, DESCRICAO, VALOR) values
+(1, 1, 1, 60, 'Calca ecologica', 'Nike', 'Azul', 'Uma bela calca. Ecologica e agradavel de usar!', 99);
 
 insert into pagamentos (PAGAMENTO) values
 ('Boleto'), ('Credito'), ('Debito');
