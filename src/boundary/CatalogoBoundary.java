@@ -7,9 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.TableProduct;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class CatalogoBoundary extends Application {
 
@@ -20,13 +25,22 @@ public class CatalogoBoundary extends Application {
     private TableColumn tableColumnMarca = new TableColumn("Marca");
     private TableColumn tableColumnPreco = new TableColumn("Preco");
 
+    private Image image = new Image(new FileInputStream(System.getProperty("user.dir") +"/images/info-icon.png"), 48, 48, false , false);
+    private ImageView imageView = new ImageView(image);
+
+    public CatalogoBoundary() throws FileNotFoundException {
+    }
+
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
         Pane pane = new Pane();
         Scene scene = new Scene(pane, 412, 339);
 
-        pane.getChildren().addAll(buttonComprar, tableViewProducts);
+        pane.getChildren().addAll(buttonComprar, tableViewProducts, imageView);
+
+        imageView.relocate(59, 233);
+        imageView.resize(48, 48);
 
         buttonComprar.relocate(167, 228);
         buttonComprar.setPrefSize(192, 58);
