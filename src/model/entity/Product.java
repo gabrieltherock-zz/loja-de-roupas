@@ -1,8 +1,8 @@
-package model;
+package model.entity;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class TableProduct {
+public class Product {
 
     private final SimpleStringProperty  modelo;
 
@@ -10,7 +10,7 @@ public class TableProduct {
 
     private final SimpleStringProperty  preco;
 
-    public TableProduct(String modelo, String marca, String preco) {
+    public Product(String modelo, String marca, String preco) {
         this.modelo = new SimpleStringProperty(modelo);
         this.marca = new SimpleStringProperty(marca);
         this.preco = new SimpleStringProperty(preco);

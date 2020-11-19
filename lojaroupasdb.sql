@@ -78,16 +78,16 @@ insert into tamanhos (TAMANHO) values
 ('PP'), ('P'), ('M'), ('G'), ('GG');
 
 insert into tecidos (TECIDO) values
-('Algodão orgânico'), ('Cânhamo'), ('Fibra de bananeira'), ('Fibra de laranja'), ('Fibra de soja'), ('Lenpur'), ('Linho'), ('Liocel'), ('Modal'), ('Piñatex'), ('Poliamida biodegradável'), ('Qmilk');
+('ALGODAO_ORGANICO'), ('CANHAMO'), ('FIBRA_DE_BANANEIRA'), ('FIBRA_DE_LARANJA'), ('FIBRA_DE_SOJA'), ('LENPUR'), ('LINHO'), ('LIOCEL'), ('MODAL'), ('PINATEX'), ('POLIAMIDA_BIODEGRADAVEL'), ('QMILK');
 
 insert into sexos (SEXO) values
-('Masculino'), ('Feminino'), ('Unissex');
+('MASCULINO'), ('FEMININO'), ('UNISSEX');
 
 insert into roupas (TAMID, TECID, SID, QUANTIDADE, MODELO, MARCA, COR, DESCRICAO, VALOR) values
 (1, 1, 1, 60, 'Calca ecologica', 'Nike', 'Azul', 'Uma bela calca. Ecologica e agradavel de usar!', 99);
 
 insert into pagamentos (PAGAMENTO) values
-('Boleto'), ('Credito'), ('Debito');
+('BOLETO'), ('CREDITO'), ('DEBITO');
 
 insert into compras (UID, RID, PID, QUANTIDADE) values
 (1, 1, 1, 30);

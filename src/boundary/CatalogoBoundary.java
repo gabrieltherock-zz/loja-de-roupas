@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.TableProduct;
+import model.entity.Product;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,7 +20,7 @@ public class CatalogoBoundary extends Application {
 
     private Button buttonComprar = new Button("Comprar");
 
-    private TableView<TableProduct> tableViewProducts = new TableView();
+    private TableView<Product> tableViewProducts = new TableView();
     private TableColumn tableColumnModelo = new TableColumn("Modelo");
     private TableColumn tableColumnMarca = new TableColumn("Marca");
     private TableColumn tableColumnPreco = new TableColumn("Preco");
@@ -42,7 +42,7 @@ public class CatalogoBoundary extends Application {
         imageView.relocate(59, 233);
         imageView.resize(48, 48);
 
-        buttonComprar.relocate(167, 228);
+        buttonComprar.relocate(176, 228);
         buttonComprar.setPrefSize(192, 58);
 
         tableViewProducts.setEditable(false);
@@ -51,16 +51,16 @@ public class CatalogoBoundary extends Application {
         tableViewProducts.setPrefSize(309, 126);
         tableViewProducts.getColumns().addAll(tableColumnModelo, tableColumnMarca, tableColumnPreco);
 
-        tableColumnModelo.setCellValueFactory(new PropertyValueFactory<TableProduct, String>("modelo"));
-        tableColumnMarca.setCellValueFactory(new PropertyValueFactory<TableProduct, String>("marca"));
-        tableColumnPreco.setCellValueFactory(new PropertyValueFactory<TableProduct, String>("preco"));
+        tableColumnModelo.setCellValueFactory(new PropertyValueFactory<Product, String>("modelo"));
+        tableColumnMarca.setCellValueFactory(new PropertyValueFactory<Product, String>("marca"));
+        tableColumnPreco.setCellValueFactory(new PropertyValueFactory<Product, String>("preco"));
 
         tableViewProducts.setItems(FXCollections.observableArrayList(
-                new TableProduct("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
-                new TableProduct("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
-                new TableProduct("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
-                new TableProduct("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
-                new TableProduct("Camisa Arco Íris", "Gabriel's", "R$ 53,99")
+                new Product("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
+                new Product("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
+                new Product("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
+                new Product("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
+                new Product("Camisa Arco Íris", "Gabriel's", "R$ 53,99")
         ));
 
         stage.setScene(scene);
