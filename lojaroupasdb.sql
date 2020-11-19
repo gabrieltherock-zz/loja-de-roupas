@@ -73,16 +73,16 @@ insert into usuarios (NOME, CPF, EMAIL, SENHA, TELEFONE) values
 insert into enderecos (UID, CEP, RUA, NUMERO, COMPLEMENTO, REFERENCIA) values
 (1, '08948678', 'Grande Craque Neto', 10, 'Portao do curinthia', 'Proximo daquele lugar');
 
-insert into tamanhos (TAMANHO) values 
+insert into tamanhos (TAMANHO) values
 ('PP'), ('P'), ('M'), ('G'), ('GG');
 
-insert into tecidos (TECIDO) values 
-('Poliester'), ('Algodao'), ('Malha'), ('Sarja'), ('Jeans'), ('La');
+insert into tecidos (TECIDO) values
+('Algodão orgânico'), ('Cânhamo'), ('Fibra de bananeira'), ('Fibra de laranja'), ('Fibra de soja'), ('Lenpur'), ('Linho'), ('Liocel'), ('Modal'), ('Piñatex'), ('Poliamida biodegradável'), ('Qmilk');
 
-insert into sexos (SEXO) values 
+insert into sexos (SEXO) values
 ('Masculino'), ('Feminino'), ('Unissex');
 
-insert into roupas (TAMID, TECID, SID, QUANTIDADE, MARCA, COR, DESCRICAO, VALOR) values 
+insert into roupas (TAMID, TECID, SID, QUANTIDADE, MARCA, COR, DESCRICAO, VALOR) values
 (1, 1, 1, 60, 'Nike', 'Azul', 'Uma bela calca. Ecologica e agradavel de usar!', 99);
 
 insert into pagamentos (PAGAMENTO) values
