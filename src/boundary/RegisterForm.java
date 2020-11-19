@@ -18,7 +18,7 @@ public class RegisterForm extends Application{
     private Label labelCep = new Label("CEP");
     private Label labelLogradouro = new Label("Logradouro");
     private Label labelRua = new Label("Rua");
-    private Label labelReferencia = new Label("Ponto de refer�ncia");
+    private Label labelReferencia = new Label("Ponto de referência");
     
     private TextField textFieldNome = new TextField();
     private TextField textFieldCpf = new TextField();
