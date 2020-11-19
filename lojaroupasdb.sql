@@ -25,7 +25,7 @@ create table tamanhos (
 
 create table tecidos (
 	TECID int auto_increment primary key,
-	TECIDO varchar(10) not null);
+	TECIDO varchar(30) not null);
 
 create table sexos (
 	SID int auto_increment primary key,
