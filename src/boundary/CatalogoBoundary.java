@@ -34,6 +34,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
         imageView.relocate(115, 269);
         imageView.resize(48, 48);
+        imageView.setOnMouseClicked(e -> this.acionarComando("detalhes"));
 
         buttonComprar.relocate(223, 264);
         buttonComprar.setPrefSize(192, 58);

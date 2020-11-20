@@ -22,6 +22,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
     private CadastroBoundary cadastroBoundary = new CadastroBoundary();
     private CatalogoBoundary catalogoBoundary = new CatalogoBoundary();
     private CompraBoundary compraBoundary = new CompraBoundary();
+    private DetalhesBoundary detalhesBoundary = new DetalhesBoundary();
 
     private PaneStrategy paneStrategy = cadastroBoundary;
 
@@ -75,6 +76,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
         cadastroBoundary.setAssinanteComando(this);
         catalogoBoundary.setAssinanteComando(this);
         compraBoundary.setAssinanteComando(this);
+        detalhesBoundary.setAssinanteComando(this);
 
         stage.setScene(scene);
         stage.setTitle("Loja de Roupas");
@@ -102,7 +104,10 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
             paneStrategy = catalogoBoundary;
         else if ("comprar".equals(comando))
             paneStrategy = compraBoundary;
-
+        else if ("detalhes".equals(comando))
+            paneStrategy = detalhesBoundary;
+        else if ("voltar".equals(comando))
+            paneStrategy = catalogoBoundary;
         this.paneContext();
     }
 
