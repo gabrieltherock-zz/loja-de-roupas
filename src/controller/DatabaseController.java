@@ -2,7 +2,7 @@ package controller;
 
 public class DatabaseController {
 
-    private static final String URLCON = "jdbc:mariadb://localhost:3306/lojaroupasdb?allowMultiQueries=true";
+    private static final String URLCON = "jdbc:mariadb://localhost:3306/lojadb?allowMultiQueries=true";
     private static final String USER = "root";
     private static final String PASS = "";
 

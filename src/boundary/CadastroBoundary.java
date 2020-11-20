@@ -17,9 +17,10 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando {
     private Label labelSenha = new Label("Senha");
     private Label labelTelefone = new Label("Telefone");
     private Label labelCep = new Label("CEP");
-    private Label labelLogradouro = new Label("Logradouro");
+    private Label labelNumero = new Label("Número");
+    private Label labelComplemento = new Label("Comp.");
     private Label labelRua = new Label("Rua");
-    private Label labelReferencia = new Label("Ponto de referência");
+    private Label labelReferencia = new Label("Referência");
     
     private TextField textFieldNome = new TextField();
     private TextField textFieldCpf = new TextField();
@@ -27,7 +28,8 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando {
     private TextField textFieldSenha = new TextField();
     private TextField textFieldTelefone = new TextField();
     private TextField textFieldCep = new TextField();
-    private TextField textFieldLogradouro = new TextField();
+    private TextField textFieldNumero = new TextField();
+    private TextField textFieldComplemento = new TextField();
     private TextField textFieldRua = new TextField();
     private TextField textFieldReferencia = new TextField();
     
@@ -37,9 +39,9 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando {
     public CadastroBoundary() {
 
         pane.getChildren().addAll(labelNome, labelCpf, labelEmail, labelSenha,
-        		labelTelefone, labelCep, labelLogradouro, labelRua, labelReferencia,
+        		labelTelefone, labelCep, labelNumero, labelComplemento, labelRua, labelReferencia,
                 textFieldNome, textFieldCpf, textFieldEmail, textFieldSenha,
-                textFieldTelefone, textFieldCep, textFieldLogradouro, textFieldRua, textFieldReferencia,
+                textFieldTelefone, textFieldCep, textFieldNumero, textFieldComplemento, textFieldRua, textFieldReferencia,
                 buttonCadastrarUsuario);
         
         //1 Nome
@@ -72,10 +74,10 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando {
         textFieldCep.setMinSize(155, 27);
         textFieldCep.relocate(359,159);
 
-        //7 Logradouro
-        labelLogradouro.relocate(16,217);
-        textFieldLogradouro.setMinSize(155, 27);
-        textFieldLogradouro.relocate(110,214);
+        //7 Numero
+        labelNumero.relocate(16,217);
+        textFieldNumero.setMinSize(155, 27);
+        textFieldNumero.relocate(110,214);
         
         //8 Rua
         labelRua.relocate(307,217);
@@ -84,8 +86,13 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando {
         
         //9 Ponto de referencia
         labelReferencia.relocate(16,269);
-        textFieldReferencia.setMinSize(374, 27);
-        textFieldReferencia.relocate(140,266);
+        textFieldReferencia.setMinSize(155, 27);
+        textFieldReferencia.relocate(110,266);
+
+        //10 Complemento
+        labelComplemento.relocate(306, 269);
+        textFieldComplemento.setMinSize(155, 27);
+        textFieldComplemento.relocate(359, 266);
         
         buttonCadastrarUsuario.setMinSize(121, 65);
         buttonCadastrarUsuario.setStyle("-fx-font-size:30");

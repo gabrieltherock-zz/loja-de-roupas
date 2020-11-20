@@ -50,11 +50,11 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         tableColumnPreco.setCellValueFactory(new PropertyValueFactory<Product, String>("preco"));
 
         tableViewProducts.setItems(FXCollections.observableArrayList(
-                new Product("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
-                new Product("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
-                new Product("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
-                new Product("Camisa Arco Íris", "Gabriel's", "R$ 53,99"),
-                new Product("Camisa Arco Íris", "Gabriel's", "R$ 53,99")
+                new Product("Camisa Arco Ã­ris", "Gabriel's", "R$ 53,99"),
+                new Product("Camisa Arco Ã­ris", "Gabriel's", "R$ 53,99"),
+                new Product("Camisa Arco Ã­ris", "Gabriel's", "R$ 53,99"),
+                new Product("Camisa Arco Ã­ris", "Gabriel's", "R$ 53,99"),
+                new Product("Camisa Arco Ã­ris", "Gabriel's", "R$ 53,99")
         ));
     }
 
