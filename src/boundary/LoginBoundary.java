@@ -1,7 +1,8 @@
 package boundary;
 
-import controller.DatabaseController;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,7 +15,15 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class LoginBoundary extends Application {
+public class LoginBoundary extends Application implements EventHandler<ActionEvent>, AssinanteComando {
+
+    private Pane pane = new Pane();
+
+    private CadastroBoundary cadastroBoundary = new CadastroBoundary();
+    private CatalogoBoundary catalogoBoundary = new CatalogoBoundary();
+    private CompraBoundary compraBoundary = new CompraBoundary();
+
+    private PaneStrategy paneStrategy = cadastroBoundary;
 
     private Label labelEmail = new Label("E-mail");
     private Label labelSenha = new Label("Senha");
@@ -34,10 +43,9 @@ public class LoginBoundary extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        DatabaseController dc = new DatabaseController();
+//        DatabaseController dc = new DatabaseController();
 
-        Pane pane = new Pane();
-        Scene scene = new Scene(pane, 469, 350);
+        Scene scene = new Scene(pane, 530, 400);
 
         pane.getChildren().addAll(labelEmail, labelSenha,
                 textFieldEmail, textFieldSenha,
@@ -61,6 +69,13 @@ public class LoginBoundary extends Application {
         buttonAcessar.setStyle("-fx-font-size:30");
         buttonAcessar.relocate(283, 226);
 
+        buttonCadastrar.setOnAction(this);
+        buttonAcessar.setOnAction(this);
+
+        cadastroBoundary.setAssinanteComando(this);
+        catalogoBoundary.setAssinanteComando(this);
+        compraBoundary.setAssinanteComando(this);
+
         stage.setScene(scene);
         stage.setTitle("Loja de Roupas");
         stage.show();
@@ -70,4 +85,30 @@ public class LoginBoundary extends Application {
     public static void main(String[] args) {
         Application.launch(LoginBoundary.class, args);
     }
+
+    @Override
+    public void handle(ActionEvent event) {
+        if (event.getTarget() == buttonCadastrar)
+            this.executarComando("cadastrar");
+        else if (event.getTarget() == buttonAcessar)
+            this.executarComando("acessar");
+    }
+
+    @Override
+    public void executarComando(String comando) {
+        if ("cadastrar".equals(comando))
+            paneStrategy = cadastroBoundary;
+        else if ("acessar".equals(comando))
+            paneStrategy = catalogoBoundary;
+        else if ("comprar".equals(comando))
+            paneStrategy = compraBoundary;
+
+        this.paneContext();
+    }
+
+    private void paneContext() {
+        pane.getChildren().clear();
+        pane.getChildren().add(paneStrategy.getPane());
+    }
+
 }

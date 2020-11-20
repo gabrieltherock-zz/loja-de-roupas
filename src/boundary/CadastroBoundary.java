@@ -1,14 +1,15 @@
 package boundary;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
-public class CadastroBoundary extends Application{
+public class CadastroBoundary implements PaneStrategy, ProdutorComando {
+
+    private AssinanteComando assinanteComando;
+
+    private Pane pane = new Pane();
 
 	private Label labelNome = new Label("Nome");
 	private Label labelCpf = new Label("CPF");
@@ -33,14 +34,7 @@ public class CadastroBoundary extends Application{
     private Button buttonCadastrarUsuario = new Button("Cadastrar");
     
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Pane pane = new Pane();
-        Scene scene = new Scene(pane, 600, 420);
-        
-        stage.setScene(scene);
-        stage.setTitle("Cadastro");
-        stage.show();
+    public CadastroBoundary() {
 
         pane.getChildren().addAll(labelNome, labelCpf, labelEmail, labelSenha,
         		labelTelefone, labelCep, labelLogradouro, labelRua, labelReferencia,
@@ -49,58 +43,70 @@ public class CadastroBoundary extends Application{
                 buttonCadastrarUsuario);
         
         //1 Nome
-        labelNome.relocate(10,20);
-        textFieldNome.setMinSize(202, 24);
-        textFieldNome.relocate(100,20);
+        labelNome.relocate(16,55);
+        textFieldNome.setMinSize(155, 27);
+        textFieldNome.relocate(110,52);
         
         //2 CPF
-        labelCpf.relocate(330,20);
-        textFieldCpf.setMinSize(202, 24);
-        textFieldCpf.relocate(385, 20);
+        labelCpf.relocate(306,55);
+        textFieldCpf.setMinSize(155, 27);
+        textFieldCpf.relocate(359, 52);
         
         //3 Email
-        labelEmail.relocate(10,70);
-        textFieldEmail.setMinSize(202, 24);
-        textFieldEmail.relocate(100,70);
+        labelEmail.relocate(16,109);
+        textFieldEmail.setMinSize(155, 27);
+        textFieldEmail.relocate(110,106);
         
         //4 Senha
-        labelSenha.relocate(330, 70);
-        textFieldSenha.setMinSize(202, 24);
-        textFieldSenha.relocate(385, 70);
+        labelSenha.relocate(306, 109);
+        textFieldSenha.setMinSize(155, 27);
+        textFieldSenha.relocate(359, 106);
 
         //5 Telefone
-        labelTelefone.relocate(10,120);
-        textFieldTelefone.setMinSize(202, 24);
-        textFieldTelefone.relocate(100,120);
+        labelTelefone.relocate(16,165);
+        textFieldTelefone.setMinSize(155, 27);
+        textFieldTelefone.relocate(110,159);
         
         //6 CEP
-        labelCep.relocate(330,120);
-        textFieldCep.setMinSize(202, 24);
-        textFieldCep.relocate(385,120);
+        labelCep.relocate(306,165);
+        textFieldCep.setMinSize(155, 27);
+        textFieldCep.relocate(359,159);
 
         //7 Logradouro
-        labelLogradouro.relocate(10,170);
-        textFieldLogradouro.setMinSize(202, 24);
-        textFieldLogradouro.relocate(100,170);
+        labelLogradouro.relocate(16,217);
+        textFieldLogradouro.setMinSize(155, 27);
+        textFieldLogradouro.relocate(110,214);
         
         //8 Rua
-        labelRua.relocate(330,170);
-        textFieldRua.setMinSize(202, 24);
-        textFieldRua.relocate(385,170);
+        labelRua.relocate(307,217);
+        textFieldRua.setMinSize(155, 27);
+        textFieldRua.relocate(359,214);
         
         //9 Ponto de referencia
-        labelReferencia.relocate(10,220);
-        textFieldReferencia.setMinSize(435, 24);
-        textFieldReferencia.relocate(153,220);
+        labelReferencia.relocate(16,269);
+        textFieldReferencia.setMinSize(374, 27);
+        textFieldReferencia.relocate(140,266);
         
-        buttonCadastrarUsuario.setMinSize(200, 103);
+        buttonCadastrarUsuario.setMinSize(121, 65);
         buttonCadastrarUsuario.setStyle("-fx-font-size:30");
-        buttonCadastrarUsuario.relocate(385, 280);
+        buttonCadastrarUsuario.relocate(348, 312);
+        buttonCadastrarUsuario.setOnAction(e -> acionarComando("login"));
 
     }
 
-    public static void main(String[] args) {
-        Application.launch(CadastroBoundary.class, args);
+    @Override
+    public Pane getPane() {
+        return pane;
+    }
+
+    @Override
+    public void setAssinanteComando(AssinanteComando assinanteComando) {
+        this.assinanteComando = assinanteComando;
+    }
+
+    @Override
+    public void acionarComando(String comando) {
+        this.assinanteComando.executarComando(comando);
     }
 }
 

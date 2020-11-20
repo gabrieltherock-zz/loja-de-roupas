@@ -9,9 +9,13 @@ import javafx.scene.control.Spinner;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class CompraBoundary extends Application{
+public class CompraBoundary implements PaneStrategy, ProdutorComando{
 
-	private Label labelItem = new Label("Item");
+    private AssinanteComando assinanteComando;
+
+    private Pane pane = new Pane();
+
+    private Label labelItem = new Label("Item");
 	private Label labelQuantidade = new Label("Quantidade");
 	private Label labelTotal = new Label("Total");
     private Label labelFormadePagamento = new Label("Forma de Pagamento");
@@ -23,49 +27,55 @@ public class CompraBoundary extends Application{
     
     private Button buttonComprar = new Button("Comprar");
     
-    @Override
-    public void start(Stage stage) throws Exception {
-        Pane pane = new Pane();
-        Scene scene = new Scene(pane, 600, 420);
-        
-        stage.setScene(scene);
-        stage.setTitle("Compra");
-        stage.show();
-
+    public CompraBoundary() {
         pane.getChildren().addAll(labelItem, labelQuantidade, labelTotal, labelFormadePagamento,
-        		labelModeloRoupa, labelValor, spinnerQuantidade, comboBoxFormadePagamento, buttonComprar);
-        
+                labelModeloRoupa, labelValor, spinnerQuantidade, comboBoxFormadePagamento, buttonComprar);
+
         //Item
-        labelItem.relocate(20,20);
-        labelModeloRoupa.setStyle("-fx-font-size:40");
-        labelModeloRoupa.relocate(20, 30); 
-        
+        labelItem.relocate(33,85);
+        labelItem.setStyle("-fx-font-size:20");
+        labelModeloRoupa.setStyle("-fx-font-size:24");
+        labelModeloRoupa.relocate(33, 109);
+
         //Quantidade
-        labelQuantidade.relocate(320,50);
-       	spinnerQuantidade.relocate(470, 50);
-       	spinnerQuantidade.setMinWidth(110);
-       	spinnerQuantidade.setMaxWidth(110);
-       	spinnerQuantidade.setEditable(true);
-        
+        labelQuantidade.relocate(215,111);
+        labelQuantidade.setStyle("-fx-font-size:20");
+        spinnerQuantidade.relocate(338, 113);
+        spinnerQuantidade.setMinWidth(110);
+        spinnerQuantidade.setMaxWidth(110);
+        spinnerQuantidade.setEditable(true);
+
         //Total
-        labelTotal.relocate(20,150);
-        labelValor.setStyle("-fx-font-size:40");
-        labelValor.relocate(20, 165); 
-               
+        labelTotal.relocate(33,172);
+        labelTotal.setStyle("-fx-font-size:20");
+        labelValor.setStyle("-fx-font-size:24");
+        labelValor.relocate(33, 200);
+
         //Pagamento
-        labelFormadePagamento.relocate(320, 150);
-        comboBoxFormadePagamento.relocate(470, 150);
+        labelFormadePagamento.relocate(215, 172);
+        labelFormadePagamento.setStyle("-fx-font-size:20");
+        comboBoxFormadePagamento.relocate(415, 175);
         comboBoxFormadePagamento.setMinWidth(110);
         comboBoxFormadePagamento.setMaxWidth(110);
         comboBoxFormadePagamento.getItems().addAll("Boleto", "Débito", "Crédito");
-                
-        buttonComprar.setMinSize(220, 15);
-        buttonComprar.setStyle("-fx-font-size:20");
-        buttonComprar.relocate(200, 320);
 
+        buttonComprar.setMinSize(119, 32);
+        buttonComprar.setStyle("-fx-font-size:24");
+        buttonComprar.relocate(209, 283);
     }
 
-    public static void main(String[] args) {
-        Application.launch(CompraBoundary.class, args);
+    @Override
+    public Pane getPane() {
+        return pane;
+    }
+
+    @Override
+    public void setAssinanteComando(AssinanteComando assinanteComando) {
+        this.assinanteComando = assinanteComando;
+    }
+
+    @Override
+    public void acionarComando(String comando) {
+        this.assinanteComando.executarComando(comando);
     }
 }
