@@ -1,5 +1,6 @@
 package boundary;
 
+import controller.DatabaseController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,7 +45,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
     @Override
     public void start(Stage stage) {
 
-//        DatabaseController dc = new DatabaseController();
+        DatabaseController dc = new DatabaseController();
 
         Scene scene = new Scene(pane, 530, 400);
 
