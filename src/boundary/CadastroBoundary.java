@@ -90,7 +90,7 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando {
         buttonCadastrarUsuario.setMinSize(121, 65);
         buttonCadastrarUsuario.setStyle("-fx-font-size:30");
         buttonCadastrarUsuario.relocate(348, 312);
-        buttonCadastrarUsuario.setOnAction(e -> acionarComando("login"));
+        buttonCadastrarUsuario.setOnAction(e -> acionarComando("acessar"));
 
     }
 

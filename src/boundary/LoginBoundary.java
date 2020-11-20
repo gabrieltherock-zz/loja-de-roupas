@@ -41,7 +41,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
 //        DatabaseController dc = new DatabaseController();
 
