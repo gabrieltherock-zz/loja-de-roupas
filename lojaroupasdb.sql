@@ -67,6 +67,7 @@ create table recibos (
 	foreign key(CID) references compras(CID));
 
 insert into usuarios (NOME, CPF, EMAIL, SENHA, TELEFONE) values
+('ADMIN', '00000000000', 'admin@admin.com', 'admin', '00000000000'),					    
 ('GABRIEL', '78912345610', 'gabriel@gmail.com', 'spfc', '11976887687'),
 ('KARINE', '85589345610', 'karine@gmail.com', 'nulo', '11996317687'),
 ('RODRIGO', '87742345610', 'rodrigo@gmail.com', 'flamengo', '11924117687');
