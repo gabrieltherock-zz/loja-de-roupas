@@ -18,22 +18,22 @@ public class UsuarioControl {
     private UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 
     public Usuario getUsuario() {
-        Usuario u = new Usuario();
-        u.setCpf(cpfProperty.get());
-        u.setNome(nomeProperty.get());
-        u.setEmail(emailProperty.get());
-        u.setSenha(senhaProperty.get());
-        u.setTelefone(telefoneProperty.get());
-        return u;
+        Usuario usuario = new Usuario();
+        usuario.setCpf(cpfProperty.get());
+        usuario.setNome(nomeProperty.get());
+        usuario.setEmail(emailProperty.get());
+        usuario.setSenha(senhaProperty.get());
+        usuario.setTelefone(telefoneProperty.get());
+        return usuario;
     }
 
-    public void setUsuario(Usuario u) {
-        if (u != null) {
-            cpfProperty.set(u.getCpf());
-            nomeProperty.set(u.getNome());
-            emailProperty.set(u.getEmail());
-            senhaProperty.set(u.getSenha());
-            telefoneProperty.set(u.getTelefone());
+    public void setUsuario(Usuario usuario) {
+        if (usuario != null) {
+            cpfProperty.set(usuario.getCpf());
+            nomeProperty.set(usuario.getNome());
+            emailProperty.set(usuario.getEmail());
+            senhaProperty.set(usuario.getSenha());
+            telefoneProperty.set(usuario.getTelefone());
         }
     }
 

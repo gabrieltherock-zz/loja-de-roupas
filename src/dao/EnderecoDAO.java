@@ -5,5 +5,5 @@ import model.entity.Endereco;
 
 public interface EnderecoDAO {
 
-    Endereco adicionar(Endereco e) throws EnderecoException;
+    Endereco adicionar(Endereco endereco) throws EnderecoException;
 }

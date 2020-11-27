@@ -20,21 +20,21 @@ public class EnderecoControl {
     EnderecoDAO enderecoDAO = new EnderecoDAOImpl();
 
     public Endereco getEndereco() {
-        Endereco e = new Endereco();
-        e.setCep(cepProperty.get());
-        e.setRua(ruaProperty.get());
-        e.setNumero(numeroProperty.get());
-        e.setComplemento(complementoProperty.get());
-        e.setReferencia(referenciaProperty.get());
-        return e;
+        Endereco endereco = new Endereco();
+        endereco.setCep(cepProperty.get());
+        endereco.setRua(ruaProperty.get());
+        endereco.setNumero(numeroProperty.get());
+        endereco.setComplemento(complementoProperty.get());
+        endereco.setReferencia(referenciaProperty.get());
+        return endereco;
     }
 
-    public void setEndereco(Endereco e) {
-        cepProperty.set(e.getCep());
-        ruaProperty.set(e.getRua());
-        numeroProperty.set(e.getNumero());
-        complementoProperty.set(e.getComplemento());
-        referenciaProperty.set(e.getReferencia());
+    public void setEndereco(Endereco endereco) {
+        cepProperty.set(endereco.getCep());
+        ruaProperty.set(endereco.getRua());
+        numeroProperty.set(endereco.getNumero());
+        complementoProperty.set(endereco.getComplemento());
+        referenciaProperty.set(endereco.getReferencia());
     }
 
     public Endereco adicionar() throws EnderecoException {

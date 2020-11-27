@@ -143,11 +143,11 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando{
     @Override
     public void acionarComando(String comando) {
         try {
-            Usuario u = usuarioControl.adicionar();
-            Endereco e = enderecoControl.adicionar();
-            e.setUsuario(u);
-            u.mostrarUsuario();
-            e.mostrarEndereco();
+            Usuario usuario = usuarioControl.adicionar();
+            Endereco endereco = enderecoControl.adicionar();
+            endereco.setUsuario(usuario);
+            usuario.mostrarUsuario();
+            endereco.mostrarEndereco();
         } catch (UsuarioException | EnderecoException e) {
             e.printStackTrace();
         }
