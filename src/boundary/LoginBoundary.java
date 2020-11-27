@@ -1,16 +1,19 @@
 package boundary;
 
+import control.LoginControl;
+import dao.LoginDAOImpl;
+import dao.exceptions.LoginException;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.entity.Usuario;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,7 +33,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
     private Label labelSenha = new Label("Senha");
 
     private TextField textFieldEmail = new TextField();
-    private TextField textFieldSenha = new TextField();
+    private PasswordField passwordFieldSenha = new PasswordField();
 
     private Button buttonCadastrar = new Button("Cadastrar");
     private Button buttonAcessar = new Button("Acessar");
@@ -38,15 +41,23 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
     private Image image = new Image(new FileInputStream(System.getProperty("user.dir") +"/images/key-icon.png"), 128, 128, false , false);
     private ImageView imageView = new ImageView(image);
 
+    LoginControl loginControl = new LoginControl();
     public LoginBoundary() throws FileNotFoundException {
+    }
+
+    public void vincularCampos() {
+        Bindings.bindBidirectional(textFieldEmail.textProperty(), loginControl.getEmailProperty());
+        Bindings.bindBidirectional(passwordFieldSenha.textProperty(), loginControl.getSenhaProperty());
     }
 
     @Override
     public void start(Stage stage) {
+        vincularCampos();
+
         Scene scene = new Scene(pane, 530, 400);
 
         pane.getChildren().addAll(labelEmail, labelSenha,
-                textFieldEmail, textFieldSenha,
+                textFieldEmail, passwordFieldSenha,
                 buttonCadastrar, buttonAcessar, imageView);
 
         imageView.relocate(39, 55);
@@ -56,8 +67,8 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
         textFieldEmail.relocate(254,70);
 
         labelSenha.relocate(203,124);
-        textFieldSenha.setMinSize(202, 24);
-        textFieldSenha.relocate(254, 124);
+        passwordFieldSenha.setMinSize(202, 24);
+        passwordFieldSenha.relocate(254, 124);
 
         buttonCadastrar.setMinSize(176, 81);
         buttonCadastrar.setStyle("-fx-font-size:30");
@@ -89,9 +100,18 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
     public void handle(ActionEvent event) {
         if (event.getTarget() == buttonCadastrar)
             this.executarComando("cadastrar");
-        else if (event.getTarget() == buttonAcessar)
+        else if (event.getTarget() == buttonAcessar) {
+            try {
+                Usuario usuario = loginControl.verificar();
+                usuario.mostrarUsuario();
+            } catch (LoginException e) {
+                new Alert(Alert.AlertType.ERROR, "Erro ao fazer login!").show();
+                e.printStackTrace();
+            }
             this.executarComando("acessar");
+        }
     }
+
 
     @Override
     public void executarComando(String comando) {

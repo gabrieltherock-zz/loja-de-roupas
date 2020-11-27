@@ -5,6 +5,7 @@ import dao.exceptions.UsuarioException;
 import control.EnderecoControl;
 import control.UsuarioControl;
 import javafx.beans.binding.Bindings;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -149,6 +150,7 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando{
             usuario.mostrarUsuario();
             endereco.mostrarEndereco();
         } catch (UsuarioException | EnderecoException e) {
+            new Alert(Alert.AlertType.ERROR, "Erro ao se cadastrar!");
             e.printStackTrace();
         }
         this.assinanteComando.executarComando(comando);

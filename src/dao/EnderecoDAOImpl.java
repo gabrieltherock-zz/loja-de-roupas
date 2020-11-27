@@ -26,9 +26,9 @@ public class EnderecoDAOImpl implements EnderecoDAO {
             rs.first();
             endereco.setId(rs.getLong(1));
             con.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw new EnderecoException(ex);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new EnderecoException(e);
         }
         return endereco;
     }
