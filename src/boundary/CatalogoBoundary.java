@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-import model.entity.Product;
+import model.entity.Produto;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,7 +25,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
     private Button buttonComprar = new Button("Comprar");
 
-    private TableView<Product> tableViewProducts = new TableView();
+    private TableView<Produto> tableViewProducts = new TableView();
     private TableColumn tableColumnModelo = new TableColumn("Modelo");
     private TableColumn tableColumnMarca = new TableColumn("Marca");
     private TableColumn tableColumnPreco = new TableColumn("Preco");
@@ -53,16 +53,16 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         tableViewProducts.setPrefSize(309, 126);
         tableViewProducts.getColumns().addAll(tableColumnModelo, tableColumnMarca, tableColumnPreco);
 
-        tableColumnModelo.setCellValueFactory(new PropertyValueFactory<Product, String>("modelo"));
-        tableColumnMarca.setCellValueFactory(new PropertyValueFactory<Product, String>("marca"));
-        tableColumnPreco.setCellValueFactory(new PropertyValueFactory<Product, String>("preco"));
+        tableColumnModelo.setCellValueFactory(new PropertyValueFactory<Produto, String>("modelo"));
+        tableColumnMarca.setCellValueFactory(new PropertyValueFactory<Produto, String>("marca"));
+        tableColumnPreco.setCellValueFactory(new PropertyValueFactory<Produto, String>("preco"));
 
         tableViewProducts.setItems(FXCollections.observableArrayList(
-                new Product("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
-                new Product("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
-                new Product("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
-                new Product("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
-                new Product("Camisa Arco íris", "Gabriel's", "R$ 53,99")
+                new Produto("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
+                new Produto("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
+                new Produto("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
+                new Produto("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
+                new Produto("Camisa Arco íris", "Gabriel's", "R$ 53,99")
         ));
     }
 

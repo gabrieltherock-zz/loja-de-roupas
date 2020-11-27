@@ -1,11 +1,20 @@
 package boundary;
 
+import dao.exceptions.EnderecoException;
+import dao.exceptions.UsuarioException;
+import control.EnderecoControl;
+import control.UsuarioControl;
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.util.StringConverter;
+import javafx.util.converter.IntegerStringConverter;
+import model.entity.Endereco;
+import model.entity.Usuario;
 
-public class CadastroBoundary implements PaneStrategy, ProdutorComando {
+public class CadastroBoundary implements PaneStrategy, ProdutorComando{
 
     private AssinanteComando assinanteComando;
 
@@ -34,9 +43,30 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando {
     private TextField textFieldReferencia = new TextField();
     
     private Button buttonCadastrarUsuario = new Button("Cadastrar");
-    
+
+    private UsuarioControl usuarioControl = new UsuarioControl();
+    private EnderecoControl enderecoControl = new EnderecoControl();
+
+    public void vincularCampos() {
+        StringConverter<? extends Number> numeroConverter = new IntegerStringConverter();
+
+        Bindings.bindBidirectional(textFieldNome.textProperty(), usuarioControl.getNomeProperty());
+        Bindings.bindBidirectional(textFieldCpf.textProperty(), usuarioControl.getCpfProperty());
+        Bindings.bindBidirectional(textFieldEmail.textProperty(), usuarioControl.getEmailProperty());
+        Bindings.bindBidirectional(textFieldSenha.textProperty(), usuarioControl.getSenhaProperty());
+        Bindings.bindBidirectional(textFieldTelefone.textProperty(), usuarioControl.getTelefoneProperty());
+
+        Bindings.bindBidirectional(textFieldCep.textProperty(), enderecoControl.getCepProperty());
+        Bindings.bindBidirectional(	textFieldNumero.textProperty(),
+                enderecoControl.getNumeroProperty(),
+                (StringConverter<Number>) numeroConverter);
+        Bindings.bindBidirectional(textFieldComplemento.textProperty(), enderecoControl.getComplementoProperty());
+        Bindings.bindBidirectional(textFieldRua.textProperty(), enderecoControl.getRuaProperty());
+        Bindings.bindBidirectional(textFieldReferencia.textProperty(), enderecoControl.getReferenciaProperty());
+    }
 
     public CadastroBoundary() {
+        vincularCampos();
 
         pane.getChildren().addAll(labelNome, labelCpf, labelEmail, labelSenha,
         		labelTelefone, labelCep, labelNumero, labelComplemento, labelRua, labelReferencia,
@@ -98,7 +128,6 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando {
         buttonCadastrarUsuario.setStyle("-fx-font-size:30");
         buttonCadastrarUsuario.relocate(348, 312);
         buttonCadastrarUsuario.setOnAction(e -> acionarComando("acessar"));
-
     }
 
     @Override
@@ -113,7 +142,17 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando {
 
     @Override
     public void acionarComando(String comando) {
+        try {
+            Usuario u = usuarioControl.adicionar();
+            Endereco e = enderecoControl.adicionar();
+            e.setUsuario(u);
+            u.mostrarUsuario();
+            e.mostrarEndereco();
+        } catch (UsuarioException | EnderecoException e) {
+            e.printStackTrace();
+        }
         this.assinanteComando.executarComando(comando);
     }
+
 }
 
