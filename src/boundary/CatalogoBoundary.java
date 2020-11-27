@@ -2,12 +2,14 @@ package boundary;
 
 import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import model.entity.Product;
 
 import java.io.FileInputStream;
@@ -18,6 +20,8 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     private AssinanteComando assinanteComando;
 
     private Pane pane = new Pane();
+
+    private Label labelInfo = new Label("Selecione um produto e clique no ícone abaixo para mostrar detalhes");
 
     private Button buttonComprar = new Button("Comprar");
 
@@ -30,7 +34,10 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     private ImageView imageView = new ImageView(image);
 
     public CatalogoBoundary() throws FileNotFoundException {
-        pane.getChildren().addAll(buttonComprar, tableViewProducts, imageView);
+        pane.getChildren().addAll(labelInfo, buttonComprar, tableViewProducts, imageView);
+
+        labelInfo.relocate(100, 232);
+        labelInfo.setFont(Font.font(11));
 
         imageView.relocate(115, 269);
         imageView.resize(48, 48);
