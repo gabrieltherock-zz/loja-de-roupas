@@ -16,6 +16,7 @@ import model.entity.Usuario;
 import model.enums.Pagamento;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -128,18 +129,16 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
                 comboBoxFormadePagamento.getSelectionModel().getSelectedItem().equals("Boleto")) {
             labelDesconto.setVisible(true);
             total = calculaTotal(quantidade, true);
-            carregarRoupa();
         } else {
             total = calculaTotal(quantidade, false);
-            carregarRoupa();
             labelDesconto.setVisible(false);
         }
+        carregarRoupa();
     }
 
     private void carregarRoupa() {
-        DecimalFormat df = new DecimalFormat("###,##0.00");
         labelModeloRoupa.setText(roupaSelecionada.getModelo());
-        labelValor.setText("R$ " + df.format(total));
+        labelValor.setText(NumberFormat.getCurrencyInstance().format(total));
     }
 
     private double calculaTotal(int quantidade, boolean desconto) {

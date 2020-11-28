@@ -12,6 +12,7 @@ import model.entity.Roupa;
 import model.entity.Usuario;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class ReciboBoundary implements PaneStrategy, ProdutorComando {
 
@@ -35,7 +36,7 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
 
         buttonVoltar.relocate(91, 317);
         buttonVoltar.setPrefSize(105, 27);
-        buttonVoltar.setOnAction(e -> this.acionarComando("voltar para compra"));
+        buttonVoltar.setOnAction(e -> this.acionarComando("voltar para catalogo"));
 
         buttonSair.relocate(333, 317);
         buttonSair.setPrefSize(105, 27);
@@ -61,7 +62,6 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
     }
 
     private void carregarDetalhes() {
-        DecimalFormat df = new DecimalFormat("###,##0.00");
         textAreaDetalhes.setText("                    Recibo da compra\n" +
                 "\nCódigo da compra: " + reciboGerado.getCompra().getId() +
                 "\nEndereço de entrega: " + enderecoEntrega.getRua() + ", número " + enderecoEntrega.getNumero() +
@@ -70,7 +70,7 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
                 "\nData e hora da compra: " + reciboGerado.getData() +
                 "\nQuantidade de itens comprados: " + reciboGerado.getCompra().getQuantidade() + " unidades" +
                 "\nForma de pagamento: " + reciboGerado.getCompra().getPagamento().getNome() +
-                "\nValor total: R$ " + df.format(reciboGerado.getCompra().getTotal()));
+                "\nValor total: " + NumberFormat.getCurrencyInstance().format(reciboGerado.getCompra().getTotal()));
     }
 
     @Override

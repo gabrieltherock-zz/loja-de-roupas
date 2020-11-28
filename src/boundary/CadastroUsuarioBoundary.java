@@ -17,7 +17,7 @@ import model.entity.Endereco;
 import model.entity.Roupa;
 import model.entity.Usuario;
 
-public class CadastroBoundary implements PaneStrategy, ProdutorComando{
+public class CadastroUsuarioBoundary implements PaneStrategy, ProdutorComando{
 
     private AssinanteComando assinanteComando;
 
@@ -68,7 +68,7 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando{
         Bindings.bindBidirectional(textFieldReferencia.textProperty(), enderecoControl.getReferenciaProperty());
     }
 
-    public CadastroBoundary() {
+    public CadastroUsuarioBoundary() {
         vincularCampos();
 
         pane.getChildren().addAll(labelNome, labelCpf, labelEmail, labelSenha,

@@ -30,18 +30,19 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
 
     private Pane pane = new Pane();
 
-    private static Usuario usuarioLogado = new Usuario();
-    private static Roupa roupaSelecionada = new Roupa();
-    private static Compra compraRealizada = new Compra();
-    private static Endereco enderecoEntrega = new Endereco();
+    private static Usuario USUARIO_LOGADO = new Usuario();
+    private static Roupa ROUPA_SELECIONADA = new Roupa();
+    private static Compra COMPRA_REALIZADA = new Compra();
+    private static Endereco ENDERECO_ENTREGA = new Endereco();
 
-    private CadastroBoundary cadastroBoundary = new CadastroBoundary();
+    private CadastroUsuarioBoundary cadastroUsuarioBoundary = new CadastroUsuarioBoundary();
     private CatalogoBoundary catalogoBoundary = new CatalogoBoundary();
     private CompraBoundary compraBoundary = new CompraBoundary();
     private DetalhesBoundary detalhesBoundary = new DetalhesBoundary();
     private ReciboBoundary reciboBoundary = new ReciboBoundary();
+    private CadastroProdutoBoundary cadastroProdutoBoundary = new CadastroProdutoBoundary();
 
-    private PaneStrategy paneStrategy = cadastroBoundary;
+    private PaneStrategy paneStrategy = cadastroUsuarioBoundary;
 
     private Label labelEmail = new Label("E-mail");
     private Label labelSenha = new Label("Senha");
@@ -97,11 +98,12 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
         buttonCadastrar.setOnAction(this);
         buttonAcessar.setOnAction(this);
 
-        cadastroBoundary.setAssinanteComando(this);
+        cadastroUsuarioBoundary.setAssinanteComando(this);
         catalogoBoundary.setAssinanteComando(this);
         compraBoundary.setAssinanteComando(this);
         detalhesBoundary.setAssinanteComando(this);
         reciboBoundary.setAssinanteComando(this);
+        cadastroProdutoBoundary.setAssinanteComando(this);
 
         stage.setScene(scene);
         stage.setTitle("Loja de Roupas");
@@ -118,9 +120,12 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
             this.executarComando("cadastrar");
         else if (event.getTarget() == buttonAcessar) {
             try {
-                usuarioLogado = loginControl.verificar();
-                enderecoEntrega = enderecoControl.encontrarEndereco(usuarioLogado);
-                this.executarComando("acessar");
+                USUARIO_LOGADO = loginControl.verificar();
+                ENDERECO_ENTREGA = enderecoControl.encontrarEndereco(USUARIO_LOGADO);
+                if (USUARIO_LOGADO.getEmail().equals("admin@admin.com"))
+                    this.executarComando("acessar cadastro de produto");
+                else
+                    this.executarComando("acessar");
             } catch (LoginException | EnderecoException e) {
                 new Alert(Alert.AlertType.ERROR, "Erro ao fazer login!").show();
                 e.printStackTrace();
@@ -131,9 +136,11 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
     @Override
     public void executarComando(String comando) {
         if ("cadastrar".equals(comando))
-            paneStrategy = cadastroBoundary;
+            paneStrategy = cadastroUsuarioBoundary;
         else if ("acessar".equals(comando))
             paneStrategy = catalogoBoundary;
+        else if ("acessar cadastro de produto".equals(comando))
+            paneStrategy = cadastroProdutoBoundary;
         else if ("comprar".equals(comando))
             paneStrategy = compraBoundary;
         else if ("detalhes".equals(comando))
@@ -142,8 +149,6 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
             paneStrategy = catalogoBoundary;
         else if ("realizar compra".equals(comando))
             paneStrategy = reciboBoundary;
-        else if ("voltar para compra".equals(comando))
-            paneStrategy = compraBoundary;
         else if ("voltar para catalogo".equals(comando))
             paneStrategy = catalogoBoundary;
         else if ("sair".equals(comando))
@@ -153,21 +158,21 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
 
     private void paneContext() {
         pane.getChildren().clear();
-        pane.getChildren().add(paneStrategy.getPane(usuarioLogado, roupaSelecionada, compraRealizada, enderecoEntrega));
+        pane.getChildren().add(paneStrategy.getPane(USUARIO_LOGADO, ROUPA_SELECIONADA, COMPRA_REALIZADA, ENDERECO_ENTREGA));
     }
     public static void setUsuarioLogado(Usuario usuario) {
-        usuarioLogado = usuario;
+        USUARIO_LOGADO = usuario;
     }
 
     public static void setRoupaSelecionada(Roupa roupa) {
-        roupaSelecionada = roupa;
+        ROUPA_SELECIONADA = roupa;
     }
 
     public static void setCompraRealizada(Compra compra) {
-        compraRealizada = compra;
+        COMPRA_REALIZADA = compra;
     }
 
     public static void setEnderecoEntrega(Endereco endereco) {
-        enderecoEntrega = endereco;
+        ENDERECO_ENTREGA = endereco;
     }
 }
