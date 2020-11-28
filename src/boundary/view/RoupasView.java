@@ -1,8 +1,8 @@
-package model.entity;
+package boundary.view;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Produto {
+public class RoupasView {
 
     private final SimpleStringProperty modelo;
 
@@ -10,7 +10,7 @@ public class Produto {
 
     private final SimpleStringProperty preco;
 
-    public Produto(String modelo, String marca, String preco) {
+    public RoupasView(String modelo, String marca, String preco) {
         this.modelo = new SimpleStringProperty(modelo);
         this.marca = new SimpleStringProperty(marca);
         this.preco = new SimpleStringProperty(preco);

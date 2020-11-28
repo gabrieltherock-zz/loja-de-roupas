@@ -1,8 +1,9 @@
 package boundary;
 
-import dao.ProdutoDAO;
-import dao.ProdutoDAOImpl;
-import dao.exceptions.ProdutoException;
+import boundary.view.RoupasView;
+import dao.RoupasDAO;
+import dao.RoupasDAOImpl;
+import dao.exceptions.RoupasException;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -10,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-import model.entity.Produto;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,7 +26,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
     private Button buttonComprar = new Button("Comprar");
 
-    private TableView<Produto> tableViewProducts = new TableView();
+    private TableView<RoupasView> tableViewProducts = new TableView();
     private TableColumn tableColumnModelo = new TableColumn("Modelo");
     private TableColumn tableColumnMarca = new TableColumn("Marca");
     private TableColumn tableColumnPreco = new TableColumn("Preço");
@@ -34,15 +34,15 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     private Image image = new Image(new FileInputStream(System.getProperty("user.dir") +"/images/info-icon.png"), 48, 48, false , false);
     private ImageView imageView = new ImageView(image);
 
-    ProdutoDAO produtoDAO = new ProdutoDAOImpl();
+    RoupasDAO roupasViewDAO = new RoupasDAOImpl();
 
-    List<Produto> produtos;
+    List<RoupasView> roupas;
 
     public void carregaProdutos() {
         try {
-            produtos = produtoDAO.carregarProdutos();
-        } catch (ProdutoException e) {
-            new Alert(Alert.AlertType.ERROR, "Erro ao carregar a lista de produtos!").show();
+            roupas = roupasViewDAO.carregarProdutos();
+        } catch (RoupasException e) {
+            new Alert(Alert.AlertType.ERROR, "Erro ao carregar a lista de roupaControls!").show();
             e.printStackTrace();
         }
     }
@@ -69,11 +69,11 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         tableViewProducts.setPrefSize(309, 126);
         tableViewProducts.getColumns().addAll(tableColumnModelo, tableColumnMarca, tableColumnPreco);
 
-        tableColumnModelo.setCellValueFactory(new PropertyValueFactory<Produto, String>("modelo"));
-        tableColumnMarca.setCellValueFactory(new PropertyValueFactory<Produto, String>("marca"));
-        tableColumnPreco.setCellValueFactory(new PropertyValueFactory<Produto, String>("preco"));
+        tableColumnModelo.setCellValueFactory(new PropertyValueFactory<RoupasView, String>("modelo"));
+        tableColumnMarca.setCellValueFactory(new PropertyValueFactory<RoupasView, String>("marca"));
+        tableColumnPreco.setCellValueFactory(new PropertyValueFactory<RoupasView, String>("preco"));
 
-        tableViewProducts.setItems(FXCollections.observableArrayList(produtos));
+        tableViewProducts.setItems(FXCollections.observableArrayList(roupas));
 
     }
 
