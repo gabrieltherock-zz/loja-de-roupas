@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import model.entity.Roupa;
 import model.entity.Usuario;
 
 import java.io.FileInputStream;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
-    private Integer roupaSelecionadaId;
+    private Roupa roupaSelecionada = new Roupa();
 
     private AssinanteComando assinanteComando;
 
@@ -65,8 +66,8 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         buttonComprar.relocate(223, 264);
         buttonComprar.setPrefSize(192, 58);
         buttonComprar.setOnAction(e -> {
+            roupaSelecionada.setId(tableViewProducts.getSelectionModel().getFocusedIndex() + 1);
             this.acionarComando("comprar");
-            roupaSelecionadaId = tableViewProducts.getSelectionModel().getFocusedIndex() + 1;
         });
 
         tableViewProducts.setEditable(false);
@@ -84,7 +85,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     }
 
     @Override
-    public Pane getPane(Usuario usuarioLogado, Integer roupaSelecionadaId) {
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada) {
         return pane;
     }
 
@@ -95,6 +96,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
     @Override
     public void acionarComando(String comando) {
+        LoginBoundary.setRoupaSelecionada(roupaSelecionada);
         this.assinanteComando.executarComando(comando);
     }
 }

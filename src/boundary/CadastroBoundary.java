@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import model.entity.Endereco;
+import model.entity.Roupa;
 import model.entity.Usuario;
 
 public class CadastroBoundary implements PaneStrategy, ProdutorComando{
@@ -132,7 +133,7 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando{
     }
 
     @Override
-    public Pane getPane(Usuario usuarioLogado, Integer roupaSelecionadaId) {
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada) {
         return pane;
     }
 

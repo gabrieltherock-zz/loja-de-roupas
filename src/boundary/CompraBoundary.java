@@ -5,6 +5,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.Pane;
+import model.entity.Roupa;
 import model.entity.Usuario;
 import model.enums.Pagamento;
 
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class CompraBoundary implements PaneStrategy, ProdutorComando{
 
-    private Integer roupaSelecionadaId;
+    private Roupa roupaSelecionada;
 
     private Usuario usuarioLogado = new Usuario();
 
@@ -71,6 +72,7 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
         labelDesconto.relocate(425, 200);
 
         buttonComprar.setOnAction(e -> {
+            System.out.println(roupaSelecionada.getId());
             System.out.println(comboBoxFormadePagamento.getSelectionModel().getSelectedIndex() + 1);
             System.out.println(spinnerQuantidade.getValue());
         });
@@ -89,9 +91,9 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
     }
 
     @Override
-    public Pane getPane(Usuario usuarioLogado, Integer roupaSelecionadaId) {
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada) {
         this.usuarioLogado = usuarioLogado;
-        this.roupaSelecionadaId = roupaSelecionadaId;
+        this.roupaSelecionada = roupaSelecionada;
         return pane;
     }
 

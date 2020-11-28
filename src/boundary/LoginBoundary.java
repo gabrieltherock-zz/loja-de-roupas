@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.entity.Roupa;
 import model.entity.Usuario;
 
 import java.io.FileInputStream;
@@ -25,6 +26,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
 
     private Pane pane = new Pane();
     private Usuario usuarioLogado = new Usuario();
+    private static Roupa roupaSelecionada = new Roupa();
 
     private CadastroBoundary cadastroBoundary = new CadastroBoundary();
     private CatalogoBoundary catalogoBoundary = new CatalogoBoundary();
@@ -133,7 +135,10 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
 
     private void paneContext() {
         pane.getChildren().clear();
-        pane.getChildren().add(paneStrategy.getPane(usuarioLogado, null));
+        pane.getChildren().add(paneStrategy.getPane(usuarioLogado, roupaSelecionada));
     }
 
+    public static void setRoupaSelecionada(Roupa roupa) {
+        roupaSelecionada = roupa;
+    }
 }
