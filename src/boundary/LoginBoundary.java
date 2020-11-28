@@ -1,7 +1,6 @@
 package boundary;
 
 import control.LoginControl;
-import dao.LoginDAOImpl;
 import dao.exceptions.LoginException;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -89,7 +88,6 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
         stage.setScene(scene);
         stage.setTitle("Loja de Roupas");
         stage.show();
-
     }
 
     public static void main(String[] args) {

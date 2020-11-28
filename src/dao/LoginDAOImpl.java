@@ -10,7 +10,6 @@ public class LoginDAOImpl implements  LoginDAO {
 
     @Override
     public Usuario verificaLogin(Usuario usuario) throws LoginException {
-
         try {
             Connection con = ConnectionSingleton.instancia().connection();
             String sql = "SELECT * FROM usuarios WHERE email='" + usuario.getEmail() +

@@ -1,10 +1,10 @@
 package boundary;
 
+import dao.ProdutoDAO;
+import dao.ProdutoDAOImpl;
+import dao.exceptions.ProdutoException;
 import javafx.collections.FXCollections;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,6 +14,7 @@ import model.entity.Produto;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
@@ -28,12 +29,27 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     private TableView<Produto> tableViewProducts = new TableView();
     private TableColumn tableColumnModelo = new TableColumn("Modelo");
     private TableColumn tableColumnMarca = new TableColumn("Marca");
-    private TableColumn tableColumnPreco = new TableColumn("Preco");
+    private TableColumn tableColumnPreco = new TableColumn("Preço");
 
     private Image image = new Image(new FileInputStream(System.getProperty("user.dir") +"/images/info-icon.png"), 48, 48, false , false);
     private ImageView imageView = new ImageView(image);
 
+    ProdutoDAO produtoDAO = new ProdutoDAOImpl();
+
+    List<Produto> produtos;
+
+    public void carregaProdutos() {
+        try {
+            produtos = produtoDAO.carregarProdutos();
+        } catch (ProdutoException e) {
+            new Alert(Alert.AlertType.ERROR, "Erro ao carregar a lista de produtos!").show();
+            e.printStackTrace();
+        }
+    }
+
     public CatalogoBoundary() throws FileNotFoundException {
+        carregaProdutos();
+
         pane.getChildren().addAll(labelInfo, buttonComprar, tableViewProducts, imageView);
 
         labelInfo.relocate(100, 232);
@@ -57,13 +73,8 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         tableColumnMarca.setCellValueFactory(new PropertyValueFactory<Produto, String>("marca"));
         tableColumnPreco.setCellValueFactory(new PropertyValueFactory<Produto, String>("preco"));
 
-        tableViewProducts.setItems(FXCollections.observableArrayList(
-                new Produto("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
-                new Produto("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
-                new Produto("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
-                new Produto("Camisa Arco íris", "Gabriel's", "R$ 53,99"),
-                new Produto("Camisa Arco íris", "Gabriel's", "R$ 53,99")
-        ));
+        tableViewProducts.setItems(FXCollections.observableArrayList(produtos));
+
     }
 
     @Override

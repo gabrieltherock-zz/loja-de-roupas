@@ -88,7 +88,9 @@ insert into sexos (SEXO) values
 ('Masculino'), ('Feminino'), ('Unissex');
 
 insert into roupas (TAMANHO_ID, TECIDO_ID, SEXO_ID, QUANTIDADE, MARCA, MODELO, COR, DESCRICAO, VALOR) values
-(1, 1, 1, 60, 'Nike', 'Calca ecologica', 'Azul', 'Uma bela calca. Ecologica e agradavel de usar!', 99);
+(1, 1, 1, 60, 'Nike', 'Calça ecológica', 'Azul', 'Uma bela calca. Ecologica e agradavel de usar!', 99),
+(1, 2, 3, 100, 'Adidas', 'Camisa ecológica', 'Preto', 'Uma camisa confortável, muito bonita e ecológica!', 70),
+(2, 3, 1, 80, 'Topper', 'Tênis de corrida', 'Branco', 'Tênis muito estiloso e totalmente pensado para corridas!', 110);
 
 insert into pagamentos (PAGAMENTO) values
 ('Boleto'), ('Credito'), ('Debito');

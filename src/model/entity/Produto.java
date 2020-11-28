@@ -4,11 +4,11 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Produto {
 
-    private final SimpleStringProperty  modelo;
+    private final SimpleStringProperty modelo;
 
-    private final SimpleStringProperty  marca;
+    private final SimpleStringProperty marca;
 
-    private final SimpleStringProperty  preco;
+    private final SimpleStringProperty preco;
 
     public Produto(String modelo, String marca, String preco) {
         this.modelo = new SimpleStringProperty(modelo);
