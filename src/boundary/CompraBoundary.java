@@ -107,7 +107,7 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
     }
 
     @Override
-    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada) {
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada) {
         this.usuarioLogado = usuarioLogado;
         this.roupaSelecionada = roupaSelecionada;
         aplicaDesconto();
@@ -154,6 +154,8 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
             compra = compraControl.realizarCompra(compra);
             roupaSelecionada = roupaControl.descontaEstoque(roupaSelecionada);
             compra.setRoupa(roupaSelecionada);
+            LoginBoundary.setCompraRealizada(compra);
+            LoginBoundary.setRoupaSelecionada(roupaSelecionada);
         } catch (CompraException | RoupaException e) {
             e.printStackTrace();
         }

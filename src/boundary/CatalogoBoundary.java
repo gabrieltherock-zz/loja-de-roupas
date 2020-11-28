@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import model.entity.Compra;
 import model.entity.Roupa;
 import model.entity.Usuario;
 
@@ -82,7 +83,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     }
 
     @Override
-    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada) {
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada) {
         return pane;
     }
 

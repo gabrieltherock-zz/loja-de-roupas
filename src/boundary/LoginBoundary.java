@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.entity.Compra;
 import model.entity.Roupa;
 import model.entity.Usuario;
 
@@ -25,13 +26,16 @@ import java.io.FileNotFoundException;
 public class LoginBoundary extends Application implements EventHandler<ActionEvent>, AssinanteComando {
 
     private Pane pane = new Pane();
+
     private Usuario usuarioLogado = new Usuario();
     private static Roupa roupaSelecionada = new Roupa();
+    private static Compra compraRealizada = new Compra();
 
     private CadastroBoundary cadastroBoundary = new CadastroBoundary();
     private CatalogoBoundary catalogoBoundary = new CatalogoBoundary();
     private CompraBoundary compraBoundary = new CompraBoundary();
     private DetalhesBoundary detalhesBoundary = new DetalhesBoundary();
+    private ReciboBoundary reciboBoundary = new ReciboBoundary();
 
     private PaneStrategy paneStrategy = cadastroBoundary;
 
@@ -91,6 +95,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
         catalogoBoundary.setAssinanteComando(this);
         compraBoundary.setAssinanteComando(this);
         detalhesBoundary.setAssinanteComando(this);
+        reciboBoundary.setAssinanteComando(this);
 
         stage.setScene(scene);
         stage.setTitle("Loja de Roupas");
@@ -130,15 +135,23 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
             paneStrategy = detalhesBoundary;
         else if ("voltar".equals(comando))
             paneStrategy = catalogoBoundary;
+        else if ("realizar compra".equals(comando))
+            paneStrategy = reciboBoundary;
+        else if ("voltar para compra".equals(comando))
+            paneStrategy = compraBoundary;
         this.paneContext();
     }
 
     private void paneContext() {
         pane.getChildren().clear();
-        pane.getChildren().add(paneStrategy.getPane(usuarioLogado, roupaSelecionada));
+        pane.getChildren().add(paneStrategy.getPane(usuarioLogado, roupaSelecionada, compraRealizada));
     }
 
     public static void setRoupaSelecionada(Roupa roupa) {
         roupaSelecionada = roupa;
+    }
+
+    public static void setCompraRealizada(Compra compra) {
+        compraRealizada = compra;
     }
 }

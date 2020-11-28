@@ -1,9 +1,9 @@
 package boundary;
 
-import dao.exceptions.EnderecoException;
-import dao.exceptions.UsuarioException;
 import control.EnderecoControl;
 import control.UsuarioControl;
+import dao.exceptions.EnderecoException;
+import dao.exceptions.UsuarioException;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import model.entity.Compra;
 import model.entity.Endereco;
 import model.entity.Roupa;
 import model.entity.Usuario;
@@ -133,7 +134,7 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando{
     }
 
     @Override
-    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada) {
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada) {
         return pane;
     }
 

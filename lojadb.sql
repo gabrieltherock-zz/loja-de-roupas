@@ -64,7 +64,7 @@ create table compras (
 create table recibos (
 	RECIBO_ID int auto_increment primary key,
 	COMPRA_ID int,
-	DATA date,
+	DATA_COMPRA timestamp,
 	foreign key(COMPRA_ID) references compras(COMPRA_ID));
 
 insert into usuarios (NOME, CPF, EMAIL, SENHA, TELEFONE) values
@@ -100,7 +100,7 @@ insert into compras (USUARIO_ID, ROUPA_ID, PAGAMENTO_ID, QUANTIDADE, TOTAL) valu
 (1, 1, 1, 30, 2970);
 
 insert into recibos(COMPRA_ID, DATA) values
-(1, '2020-11-19');
+(1, '2020-11-19 03:14:07');
 
 select * from usuarios;
 select * from enderecos;
