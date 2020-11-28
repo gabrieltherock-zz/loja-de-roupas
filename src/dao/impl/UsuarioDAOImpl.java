@@ -1,5 +1,6 @@
-package dao;
+package dao.impl;
 
+import dao.UsuarioDAO;
 import dao.exceptions.UsuarioException;
 import model.entity.Usuario;
 import singleton.ConnectionSingleton;

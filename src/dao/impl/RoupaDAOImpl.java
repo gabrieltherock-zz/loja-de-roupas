@@ -1,6 +1,7 @@
-package dao;
+package dao.impl;
 
 import boundary.view.RoupasView;
+import dao.RoupaDAO;
 import dao.exceptions.RoupaException;
 import model.entity.Roupa;
 import model.enums.Sexo;

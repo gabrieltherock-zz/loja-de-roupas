@@ -1,5 +1,6 @@
-package dao;
+package dao.impl;
 
+import dao.EnderecoDAO;
 import dao.exceptions.EnderecoException;
 import model.entity.Endereco;
 import singleton.ConnectionSingleton;

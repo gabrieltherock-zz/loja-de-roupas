@@ -1,7 +1,7 @@
 package control;
 
 import dao.EnderecoDAO;
-import dao.EnderecoDAOImpl;
+import dao.impl.EnderecoDAOImpl;
 import dao.exceptions.EnderecoException;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;

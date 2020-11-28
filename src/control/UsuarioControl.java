@@ -1,7 +1,7 @@
 package control;
 
 import dao.UsuarioDAO;
-import dao.UsuarioDAOImpl;
+import dao.impl.UsuarioDAOImpl;
 import dao.exceptions.UsuarioException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

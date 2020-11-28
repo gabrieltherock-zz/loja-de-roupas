@@ -2,7 +2,7 @@ package control;
 
 import boundary.view.RoupasView;
 import dao.RoupaDAO;
-import dao.RoupaDAOImpl;
+import dao.impl.RoupaDAOImpl;
 import dao.exceptions.RoupaException;
 import model.entity.Roupa;
 

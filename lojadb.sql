@@ -56,6 +56,7 @@ create table compras (
 	ROUPA_ID int not null,
 	PAGAMENTO_ID int not null,
 	QUANTIDADE int not null,
+	TOTAL decimal(6, 2) not null,
 	foreign key(USUARIO_ID) references usuarios(USUARIO_ID),
 	foreign key(ROUPA_ID) references roupas(ROUPA_ID),
 	foreign key(PAGAMENTO_ID) references pagamentos(PAGAMENTO_ID));
@@ -95,8 +96,8 @@ insert into roupas (TAMANHO_ID, TECIDO_ID, SEXO_ID, QUANTIDADE, MARCA, MODELO, C
 insert into pagamentos (PAGAMENTO) values
 ('Boleto'), ('Credito'), ('Debito');
 
-insert into compras (USUARIO_ID, ROUPA_ID, PAGAMENTO_ID, QUANTIDADE) values
-(1, 1, 1, 30);
+insert into compras (USUARIO_ID, ROUPA_ID, PAGAMENTO_ID, QUANTIDADE, TOTAL) values
+(1, 1, 1, 30, 2970);
 
 insert into recibos(COMPRA_ID, DATA) values
 (1, '2020-11-19');

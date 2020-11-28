@@ -1,22 +1,34 @@
 package boundary;
 
+import control.CompraControl;
+import dao.exceptions.CompraException;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.Pane;
+import model.entity.Compra;
 import model.entity.Roupa;
 import model.entity.Usuario;
 import model.enums.Pagamento;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class CompraBoundary implements PaneStrategy, ProdutorComando{
 
+    Compra compra = new Compra();
+
     private Roupa roupaSelecionada;
 
     private Usuario usuarioLogado = new Usuario();
+
+    private Pagamento pagamento;
+
+    private int quantidade = 1;
+
+    private double total;
 
     private AssinanteComando assinanteComando;
 
@@ -26,14 +38,16 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
 	private Label labelQuantidade = new Label("Quantidade");
 	private Label labelTotal = new Label("Total");
     private Label labelFormadePagamento = new Label("Forma de Pagamento");
-    private Label labelModeloRoupa = new Label("Camisa Polo");
-    private Label labelValor = new Label("R$ 59,90");
+    private Label labelModeloRoupa = new Label();
+    private Label labelValor = new Label();
     private Label labelDesconto = new Label("10% de desconto!");
     
     private Spinner<Integer> spinnerQuantidade = new Spinner<>(1, Integer.MAX_VALUE, 1);
     private ComboBox<String> comboBoxFormadePagamento = new ComboBox<>();
     
     private Button buttonComprar = new Button("Comprar");
+
+    private CompraControl compraControl = new CompraControl();
     
     public CompraBoundary() {
         pane.getChildren().addAll(labelItem, labelQuantidade, labelTotal, labelFormadePagamento,
@@ -52,6 +66,10 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
         spinnerQuantidade.setMinWidth(110);
         spinnerQuantidade.setMaxWidth(110);
         spinnerQuantidade.setEditable(true);
+        spinnerQuantidade.setOnMouseClicked(e -> {
+            quantidade = spinnerQuantidade.getValue();
+            aplicaDesconto();
+        });
 
         //Total
         labelTotal.relocate(33,172);
@@ -66,24 +84,18 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
         comboBoxFormadePagamento.setMinWidth(110);
         comboBoxFormadePagamento.setMaxWidth(110);
         comboBoxFormadePagamento.getItems().addAll(Arrays.stream(Pagamento.values())
-                .map(Pagamento::getName)
+                .map(Pagamento::getNome)
                 .collect(Collectors.toList()));
         labelDesconto.setVisible(false);
         labelDesconto.relocate(425, 200);
 
         buttonComprar.setOnAction(e -> {
-            System.out.println(roupaSelecionada.getId());
-            System.out.println(comboBoxFormadePagamento.getSelectionModel().getSelectedIndex() + 1);
-            System.out.println(spinnerQuantidade.getValue());
+            pagamento = Pagamento.getById(comboBoxFormadePagamento.getSelectionModel().getSelectedIndex() + 1);
+            carregarRoupa();
+            acionarComando("realizar compra");
         });
 
-        comboBoxFormadePagamento.setOnAction(e -> {
-            if (comboBoxFormadePagamento.getSelectionModel().getSelectedItem().equals("Boleto")){
-                labelDesconto.setVisible(true);
-            } else {
-                labelDesconto.setVisible(false);
-            }
-        });
+        comboBoxFormadePagamento.setOnAction(e -> aplicaDesconto());
 
         buttonComprar.setMinSize(119, 32);
         buttonComprar.setStyle("-fx-font-size:24");
@@ -94,7 +106,32 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
     public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada) {
         this.usuarioLogado = usuarioLogado;
         this.roupaSelecionada = roupaSelecionada;
+        aplicaDesconto();
         return pane;
+    }
+
+    private void aplicaDesconto() {
+        if (comboBoxFormadePagamento.getSelectionModel().getSelectedItem() != null &&
+                comboBoxFormadePagamento.getSelectionModel().getSelectedItem().equals("Boleto")) {
+            labelDesconto.setVisible(true);
+            total = calculaTotal(quantidade, true);
+            carregarRoupa();
+        } else {
+            total = calculaTotal(quantidade, false);
+            carregarRoupa();
+            labelDesconto.setVisible(false);
+        }
+    }
+
+    private void carregarRoupa() {
+        DecimalFormat df = new DecimalFormat("###,##0.00");
+        labelModeloRoupa.setText(roupaSelecionada.getModelo());
+        labelValor.setText("R$ " + df.format(total));
+    }
+
+    private double calculaTotal(int quantidade, boolean desconto) {
+        double total = roupaSelecionada.getValor() * quantidade;
+        return desconto ? total * 0.9 : total;
     }
 
     @Override
@@ -104,6 +141,16 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
 
     @Override
     public void acionarComando(String comando) {
+        compra.setPagamento(pagamento);
+        compra.setQuantidade(quantidade);
+        compra.setRoupa(roupaSelecionada);
+        compra.setUsuario(usuarioLogado);
+        compra.setTotal(total);
+        try {
+            compra = compraControl.realizarCompra(compra);
+        } catch (CompraException e) {
+            e.printStackTrace();
+        }
         this.assinanteComando.executarComando(comando);
     }
 }

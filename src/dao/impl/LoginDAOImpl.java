@@ -1,5 +1,6 @@
-package dao;
+package dao.impl;
 
+import dao.LoginDAO;
 import dao.exceptions.LoginException;
 import model.entity.Usuario;
 import singleton.ConnectionSingleton;
@@ -9,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginDAOImpl implements  LoginDAO {
+public class LoginDAOImpl implements LoginDAO {
 
     @Override
     public Usuario verificaLogin(Usuario usuario) throws LoginException {

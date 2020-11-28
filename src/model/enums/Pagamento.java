@@ -1,17 +1,31 @@
 package model.enums;
 
 public enum Pagamento {
-    BOLETO("Boleto"),
-    CREDITO("Crédito"),
-    DEBITO("Débito");
+    BOLETO(1, "Boleto"),
+    CREDITO(2, "Crédito"),
+    DEBITO(3, "Débito");
 
-    private String name;
+    private Integer id;
+    private String nome;
 
-    Pagamento(String name) {
-        this.name = name;
+    Pagamento(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public static Pagamento getById(Integer id) {
+        for (Pagamento p : values()) {
+            if (p.id.equals(id))
+                return p;
+        }
+        return null;
     }
 }

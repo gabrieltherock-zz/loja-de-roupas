@@ -1,7 +1,7 @@
 package control;
 
 import dao.LoginDAO;
-import dao.LoginDAOImpl;
+import dao.impl.LoginDAOImpl;
 import dao.exceptions.LoginException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
