@@ -66,4 +66,22 @@ public class RoupaDAOImpl implements RoupaDAO {
         }
         return roupa;
     }
+
+    @Override
+    public Roupa atualizarRoupa(Roupa roupa) throws RoupaException {
+        try {
+            Connection con = ConnectionSingleton.instancia().connection();
+            String sql = "UPDATE roupas SET quantidade=(quantidade - (SELECT quantidade from compras " +
+                    "WHERE compra_id = (SELECT MAX(compra_id) FROM compras))) WHERE roupa_id=" +
+                    roupa.getId();
+            PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            st.executeUpdate();
+            con.close();
+            roupa = retornarRoupa(roupa);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RoupaException(e);
+        }
+        return roupa;
+    }
 }

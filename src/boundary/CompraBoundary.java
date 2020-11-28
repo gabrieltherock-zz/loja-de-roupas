@@ -1,7 +1,9 @@
 package boundary;
 
 import control.CompraControl;
+import control.RoupaControl;
 import dao.exceptions.CompraException;
+import dao.exceptions.RoupaException;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -48,6 +50,8 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
     private Button buttonComprar = new Button("Comprar");
 
     private CompraControl compraControl = new CompraControl();
+
+    private RoupaControl roupaControl = new RoupaControl();
     
     public CompraBoundary() {
         pane.getChildren().addAll(labelItem, labelQuantidade, labelTotal, labelFormadePagamento,
@@ -148,7 +152,9 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
         compra.setTotal(total);
         try {
             compra = compraControl.realizarCompra(compra);
-        } catch (CompraException e) {
+            roupaSelecionada = roupaControl.descontaEstoque(roupaSelecionada);
+            compra.setRoupa(roupaSelecionada);
+        } catch (CompraException | RoupaException e) {
             e.printStackTrace();
         }
         this.assinanteComando.executarComando(comando);

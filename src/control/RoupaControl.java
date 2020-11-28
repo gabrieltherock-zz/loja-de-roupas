@@ -19,4 +19,8 @@ public class RoupaControl {
     public Roupa encontrarRoupa(Roupa roupa) throws RoupaException {
         return roupaDAO.retornarRoupa(roupa);
     }
+
+    public Roupa descontaEstoque(Roupa roupa) throws RoupaException {
+        return roupaDAO.atualizarRoupa(roupa);
+    }
 }
