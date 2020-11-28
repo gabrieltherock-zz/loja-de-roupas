@@ -134,7 +134,7 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando{
     }
 
     @Override
-    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada) {
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
         return pane;
     }
 
@@ -149,8 +149,8 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando{
             Usuario usuario = usuarioControl.adicionar();
             Endereco endereco = enderecoControl.adicionar();
             endereco.setUsuario(usuario);
-            usuario.mostrarUsuario();
-            endereco.mostrarEndereco();
+            LoginBoundary.setUsuarioLogado(usuario);
+            LoginBoundary.setEnderecoEntrega(endereco);
         } catch (UsuarioException | EnderecoException e) {
             new Alert(Alert.AlertType.ERROR, "Erro ao se cadastrar!");
             e.printStackTrace();

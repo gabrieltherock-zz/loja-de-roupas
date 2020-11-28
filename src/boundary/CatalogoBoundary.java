@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import model.entity.Compra;
+import model.entity.Endereco;
 import model.entity.Roupa;
 import model.entity.Usuario;
 
@@ -83,7 +84,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     }
 
     @Override
-    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada) {
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
         return pane;
     }
 
@@ -97,7 +98,6 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         roupaSelecionada.setId(tableViewProducts.getSelectionModel().getFocusedIndex() + 1);
         try {
             roupaSelecionada = roupaControl.encontrarRoupa(roupaSelecionada);
-            roupaSelecionada.mostrarRoupa();
         } catch (RoupaException e) {
             e.printStackTrace();
         }

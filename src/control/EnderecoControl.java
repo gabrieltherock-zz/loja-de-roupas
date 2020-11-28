@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.entity.Endereco;
+import model.entity.Usuario;
 
 public class EnderecoControl {
 
@@ -39,6 +40,10 @@ public class EnderecoControl {
 
     public Endereco adicionar() throws EnderecoException {
         return enderecoDAO.adicionar(getEndereco());
+    }
+
+    public Endereco encontrarEndereco(Usuario usuario) throws EnderecoException {
+        return enderecoDAO.encontrarEndereco(usuario);
     }
 
     public StringProperty getCepProperty() {

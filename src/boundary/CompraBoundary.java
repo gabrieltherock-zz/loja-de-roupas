@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.Pane;
 import model.entity.Compra;
+import model.entity.Endereco;
 import model.entity.Roupa;
 import model.entity.Usuario;
 import model.enums.Pagamento;
@@ -48,6 +49,7 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
     private ComboBox<String> comboBoxFormadePagamento = new ComboBox<>();
     
     private Button buttonComprar = new Button("Comprar");
+    private Button buttonVoltar = new Button("Voltar");
 
     private CompraControl compraControl = new CompraControl();
 
@@ -55,7 +57,8 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
     
     public CompraBoundary() {
         pane.getChildren().addAll(labelItem, labelQuantidade, labelTotal, labelFormadePagamento,
-                labelModeloRoupa, labelValor, spinnerQuantidade, comboBoxFormadePagamento, buttonComprar, labelDesconto);
+                labelModeloRoupa, labelValor, spinnerQuantidade, comboBoxFormadePagamento,
+                buttonComprar, buttonVoltar, labelDesconto);
 
         //Item
         labelItem.relocate(33,85);
@@ -99,15 +102,21 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
             acionarComando("realizar compra");
         });
 
+        buttonVoltar.setOnAction(e -> this.acionarComando("voltar para catalogo"));
+
         comboBoxFormadePagamento.setOnAction(e -> aplicaDesconto());
 
         buttonComprar.setMinSize(119, 32);
         buttonComprar.setStyle("-fx-font-size:24");
-        buttonComprar.relocate(209, 283);
+        buttonComprar.relocate(304, 289);
+
+        buttonVoltar.setMinSize(119, 31);
+        buttonVoltar.setStyle("-fx-font-size:24");
+        buttonVoltar.relocate(76, 289);
     }
 
     @Override
-    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada) {
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
         this.usuarioLogado = usuarioLogado;
         this.roupaSelecionada = roupaSelecionada;
         aplicaDesconto();
@@ -138,13 +147,7 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
         return desconto ? total * 0.9 : total;
     }
 
-    @Override
-    public void setAssinanteComando(AssinanteComando assinanteComando) {
-        this.assinanteComando = assinanteComando;
-    }
-
-    @Override
-    public void acionarComando(String comando) {
+    private void realizarCompra() {
         compra.setPagamento(pagamento);
         compra.setQuantidade(quantidade);
         compra.setRoupa(roupaSelecionada);
@@ -159,6 +162,17 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
         } catch (CompraException | RoupaException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setAssinanteComando(AssinanteComando assinanteComando) {
+        this.assinanteComando = assinanteComando;
+    }
+
+    @Override
+    public void acionarComando(String comando) {
+        if (comando.equals("realizar compra"))
+            realizarCompra();
         this.assinanteComando.executarComando(comando);
     }
 }

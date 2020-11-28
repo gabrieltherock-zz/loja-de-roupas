@@ -1,6 +1,8 @@
 package boundary;
 
+import control.EnderecoControl;
 import control.LoginControl;
+import dao.exceptions.EnderecoException;
 import dao.exceptions.LoginException;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -17,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.entity.Compra;
+import model.entity.Endereco;
 import model.entity.Roupa;
 import model.entity.Usuario;
 
@@ -27,9 +30,10 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
 
     private Pane pane = new Pane();
 
-    private Usuario usuarioLogado = new Usuario();
+    private static Usuario usuarioLogado = new Usuario();
     private static Roupa roupaSelecionada = new Roupa();
     private static Compra compraRealizada = new Compra();
+    private static Endereco enderecoEntrega = new Endereco();
 
     private CadastroBoundary cadastroBoundary = new CadastroBoundary();
     private CatalogoBoundary catalogoBoundary = new CatalogoBoundary();
@@ -52,6 +56,8 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
     private ImageView imageView = new ImageView(image);
 
     LoginControl loginControl = new LoginControl();
+    EnderecoControl enderecoControl = new EnderecoControl();
+
     public LoginBoundary() throws FileNotFoundException {
     }
 
@@ -112,16 +118,15 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
             this.executarComando("cadastrar");
         else if (event.getTarget() == buttonAcessar) {
             try {
-                this.usuarioLogado = loginControl.verificar();
-                this.usuarioLogado.mostrarUsuario();
+                usuarioLogado = loginControl.verificar();
+                enderecoEntrega = enderecoControl.encontrarEndereco(usuarioLogado);
                 this.executarComando("acessar");
-            } catch (LoginException e) {
+            } catch (LoginException | EnderecoException e) {
                 new Alert(Alert.AlertType.ERROR, "Erro ao fazer login!").show();
                 e.printStackTrace();
             }
         }
     }
-
 
     @Override
     public void executarComando(String comando) {
@@ -139,12 +144,19 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
             paneStrategy = reciboBoundary;
         else if ("voltar para compra".equals(comando))
             paneStrategy = compraBoundary;
+        else if ("voltar para catalogo".equals(comando))
+            paneStrategy = catalogoBoundary;
+        else if ("sair".equals(comando))
+            System.exit(0);
         this.paneContext();
     }
 
     private void paneContext() {
         pane.getChildren().clear();
-        pane.getChildren().add(paneStrategy.getPane(usuarioLogado, roupaSelecionada, compraRealizada));
+        pane.getChildren().add(paneStrategy.getPane(usuarioLogado, roupaSelecionada, compraRealizada, enderecoEntrega));
+    }
+    public static void setUsuarioLogado(Usuario usuario) {
+        usuarioLogado = usuario;
     }
 
     public static void setRoupaSelecionada(Roupa roupa) {
@@ -153,5 +165,9 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
 
     public static void setCompraRealizada(Compra compra) {
         compraRealizada = compra;
+    }
+
+    public static void setEnderecoEntrega(Endereco endereco) {
+        enderecoEntrega = endereco;
     }
 }

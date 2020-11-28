@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import model.entity.Compra;
+import model.entity.Endereco;
 import model.entity.Roupa;
 import model.entity.Usuario;
 
@@ -33,7 +34,7 @@ public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
     }
 
     @Override
-    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada) {
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
         this.roupaSelecionada = roupaSelecionada;
         carregarDetalhes();
         return pane;
