@@ -132,7 +132,7 @@ public class CadastroBoundary implements PaneStrategy, ProdutorComando{
     }
 
     @Override
-    public Pane getPane() {
+    public Pane getPane(Usuario usuarioLogado, Integer roupaSelecionadaId) {
         return pane;
     }
 

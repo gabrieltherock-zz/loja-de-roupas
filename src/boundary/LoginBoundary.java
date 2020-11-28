@@ -7,7 +7,11 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -20,6 +24,7 @@ import java.io.FileNotFoundException;
 public class LoginBoundary extends Application implements EventHandler<ActionEvent>, AssinanteComando {
 
     private Pane pane = new Pane();
+    private Usuario usuarioLogado = new Usuario();
 
     private CadastroBoundary cadastroBoundary = new CadastroBoundary();
     private CatalogoBoundary catalogoBoundary = new CatalogoBoundary();
@@ -100,13 +105,13 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
             this.executarComando("cadastrar");
         else if (event.getTarget() == buttonAcessar) {
             try {
-                Usuario usuario = loginControl.verificar();
-                usuario.mostrarUsuario();
+                this.usuarioLogado = loginControl.verificar();
+                this.usuarioLogado.mostrarUsuario();
+                this.executarComando("acessar");
             } catch (LoginException e) {
                 new Alert(Alert.AlertType.ERROR, "Erro ao fazer login!").show();
                 e.printStackTrace();
             }
-            this.executarComando("acessar");
         }
     }
 
@@ -128,7 +133,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
 
     private void paneContext() {
         pane.getChildren().clear();
-        pane.getChildren().add(paneStrategy.getPane());
+        pane.getChildren().add(paneStrategy.getPane(usuarioLogado, null));
     }
 
 }

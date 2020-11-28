@@ -1,17 +1,17 @@
 package model.enums;
 
 public enum Pagamento {
-    BOLETO(1),
-    CREDITO(2),
-    DEBITO(3);
+    BOLETO("Boleto"),
+    CREDITO("Crédito"),
+    DEBITO("Débito");
 
-    private Integer id;
+    private String name;
 
-    Pagamento(Integer id) {
-        this.id = id;
+    Pagamento(String name) {
+        this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 }

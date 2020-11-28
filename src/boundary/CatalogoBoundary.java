@@ -2,22 +2,27 @@ package boundary;
 
 import boundary.view.RoupasView;
 import control.RoupaControl;
-import dao.RoupaDAO;
-import dao.RoupaDAOImpl;
 import dao.exceptions.RoupaException;
 import javafx.collections.FXCollections;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import model.entity.Usuario;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
 
 public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
+
+    private Integer roupaSelecionadaId;
 
     private AssinanteComando assinanteComando;
 
@@ -59,7 +64,10 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
         buttonComprar.relocate(223, 264);
         buttonComprar.setPrefSize(192, 58);
-        buttonComprar.setOnAction(e -> this.acionarComando("comprar"));
+        buttonComprar.setOnAction(e -> {
+            this.acionarComando("comprar");
+            roupaSelecionadaId = tableViewProducts.getSelectionModel().getFocusedIndex() + 1;
+        });
 
         tableViewProducts.setEditable(false);
         tableViewProducts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -76,7 +84,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     }
 
     @Override
-    public Pane getPane() {
+    public Pane getPane(Usuario usuarioLogado, Integer roupaSelecionadaId) {
         return pane;
     }
 

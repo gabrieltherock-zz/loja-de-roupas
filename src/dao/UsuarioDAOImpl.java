@@ -4,7 +4,11 @@ import dao.exceptions.UsuarioException;
 import model.entity.Usuario;
 import singleton.ConnectionSingleton;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 

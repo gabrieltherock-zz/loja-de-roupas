@@ -1,9 +1,9 @@
 package boundary;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import model.entity.Usuario;
 
 public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
 
@@ -37,7 +37,7 @@ public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
     }
 
     @Override
-    public Pane getPane() {
+    public Pane getPane(Usuario usuarioLogado, Integer roupaSelecionadaId) {
         return pane;
     }
 

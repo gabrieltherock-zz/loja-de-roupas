@@ -8,8 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class RoupaDAOImpl implements RoupaDAO {
 
@@ -24,7 +26,7 @@ public class RoupaDAOImpl implements RoupaDAO {
             while (rs.next()) {
                 RoupasView roupaControl = new RoupasView(rs.getString(1),
                         rs.getString(2),
-                        "R$ " + rs.getString(3));
+                        NumberFormat.getCurrencyInstance().format(rs.getDouble(3)));
                 roupas.add(roupaControl);
             }
             con.close();
