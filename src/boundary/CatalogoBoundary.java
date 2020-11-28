@@ -1,9 +1,10 @@
 package boundary;
 
 import boundary.view.RoupasView;
-import dao.RoupasDAO;
-import dao.RoupasDAOImpl;
-import dao.exceptions.RoupasException;
+import control.RoupaControl;
+import dao.RoupaDAO;
+import dao.RoupaDAOImpl;
+import dao.exceptions.RoupaException;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,21 +35,18 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     private Image image = new Image(new FileInputStream(System.getProperty("user.dir") +"/images/info-icon.png"), 48, 48, false , false);
     private ImageView imageView = new ImageView(image);
 
-    RoupasDAO roupasViewDAO = new RoupasDAOImpl();
+    RoupaControl roupaControl = new RoupaControl();
 
     List<RoupasView> roupas;
 
-    public void carregaProdutos() {
+    public CatalogoBoundary() throws FileNotFoundException {
+
         try {
-            roupas = roupasViewDAO.carregarProdutos();
-        } catch (RoupasException e) {
-            new Alert(Alert.AlertType.ERROR, "Erro ao carregar a lista de roupaControls!").show();
+            roupas = roupaControl.carregarRoupas();
+        } catch (RoupaException e) {
+            new Alert(Alert.AlertType.ERROR, "Erro ao se cadastrar!");
             e.printStackTrace();
         }
-    }
-
-    public CatalogoBoundary() throws FileNotFoundException {
-        carregaProdutos();
 
         pane.getChildren().addAll(labelInfo, buttonComprar, tableViewProducts, imageView);
 

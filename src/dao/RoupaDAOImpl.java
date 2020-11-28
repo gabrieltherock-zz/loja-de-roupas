@@ -1,7 +1,7 @@
 package dao;
 
 import boundary.view.RoupasView;
-import dao.exceptions.RoupasException;
+import dao.exceptions.RoupaException;
 import singleton.ConnectionSingleton;
 
 import java.sql.Connection;
@@ -11,10 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoupasDAOImpl implements RoupasDAO {
+public class RoupaDAOImpl implements RoupaDAO {
 
     @Override
-    public List<RoupasView> carregarProdutos() throws RoupasException {
+    public List<RoupasView> carregarProdutos() throws RoupaException {
         List<RoupasView> roupas = new ArrayList<>();
         try {
             Connection con = ConnectionSingleton.instancia().connection();
@@ -30,7 +30,7 @@ public class RoupasDAOImpl implements RoupasDAO {
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RoupasException(e);
+            throw new RoupaException(e);
         }
         return roupas;
     }
