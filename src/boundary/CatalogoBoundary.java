@@ -65,10 +65,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
         buttonComprar.relocate(223, 264);
         buttonComprar.setPrefSize(192, 58);
-        buttonComprar.setOnAction(e -> {
-            roupaSelecionada.setId(tableViewProducts.getSelectionModel().getFocusedIndex() + 1);
-            this.acionarComando("comprar");
-        });
+        buttonComprar.setOnAction(e -> this.acionarComando("comprar"));
 
         tableViewProducts.setEditable(false);
         tableViewProducts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -96,6 +93,13 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
     @Override
     public void acionarComando(String comando) {
+        roupaSelecionada.setId(tableViewProducts.getSelectionModel().getFocusedIndex() + 1);
+        try {
+            roupaSelecionada = roupaControl.encontrarRoupa(roupaSelecionada);
+            roupaSelecionada.mostrarRoupa();
+        } catch (RoupaException e) {
+            e.printStackTrace();
+        }
         LoginBoundary.setRoupaSelecionada(roupaSelecionada);
         this.assinanteComando.executarComando(comando);
     }

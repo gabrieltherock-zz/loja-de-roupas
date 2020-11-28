@@ -78,19 +78,19 @@ insert into enderecos (USUARIO_ID, CEP, RUA, NUMERO, COMPLEMENTO, REFERENCIA) va
 (3, '08948678', 'Rua Grande Craque Neto', 30, 'Portao do curinthia', 'Proximo daquele lugar'),
 (4, '59355472', 'Rua Maracana', 40, 'Eh o Flamengo', 'La no RJ');
 
-insert into tamanhos (TAMANHO) values 
+insert into tamanhos (TAMANHO) values
 ('PP'), ('P'), ('M'), ('G'), ('GG');
 
-insert into tecidos (TECIDO) values 
+insert into tecidos (TECIDO) values
 ('ALGODAO_ORGANICO'), ('CANHAMO'), ('FIBRA_DE_BANANEIRA'), ('FIBRA_DE_LARANJA'), ('FIBRA_DE_SOJA'), ('LENPUR'), ('LINHO'), ('LIOCEL'), ('MODAL'), ('PINATEX'), ('POLIAMIDA_BIODEGRADAVEL'), ('QMILK');
 
-insert into sexos (SEXO) values 
+insert into sexos (SEXO) values
 ('Masculino'), ('Feminino'), ('Unissex');
 
 insert into roupas (TAMANHO_ID, TECIDO_ID, SEXO_ID, QUANTIDADE, MARCA, MODELO, COR, DESCRICAO, VALOR) values
-(1, 1, 1, 60, 'Nike', 'Calça ecológica', 'Azul', 'Uma bela calca. Ecologica e agradavel de usar!', 99),
-(1, 2, 3, 100, 'Adidas', 'Camisa ecológica', 'Preto', 'Uma camisa confortável, muito bonita e ecológica!', 70),
-(2, 3, 1, 80, 'Topper', 'Tênis de corrida', 'Branco', 'Tênis muito estiloso e totalmente pensado para corridas!', 110);
+(1, 1, 1, 60, 'Nike', 'Calca ecologica', 'Azul', 'Uma bela calca. Ecologica e agradavel de usar!', 99),
+(1, 2, 3, 100, 'Adidas', 'Camisa ecologica', 'Preto', 'Uma camisa confortavel, muito bonita e ecologica!', 70),
+(2, 3, 1, 80, 'Topper', 'Tenis de corrida', 'Branco', 'Tenis muito estiloso e totalmente pensado para corridas!', 110);
 
 insert into pagamentos (PAGAMENTO) values
 ('Boleto'), ('Credito'), ('Debito');

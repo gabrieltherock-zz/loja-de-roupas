@@ -113,4 +113,9 @@ public class Roupa {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
+    public void mostrarRoupa() {
+        System.out.println("\nROUPA_ID: " + id +
+                "\nTAMANHO_ID: " + tamanho.getId());
+    }
 }

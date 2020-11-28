@@ -16,4 +16,12 @@ public enum Tamanho {
     public Integer getId() {
         return id;
     }
+
+    public static Tamanho getById(Integer id) {
+        for (Tamanho t : values()) {
+            if (t.id.equals(id))
+                return t;
+        }
+        return null;
+    }
 }

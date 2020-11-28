@@ -8,6 +8,8 @@ import model.entity.Usuario;
 
 public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
 
+    private Roupa roupaSelecionada;
+
     private AssinanteComando assinanteComando;
 
     private Pane pane = new Pane();
@@ -26,20 +28,25 @@ public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
         textAreaDetalhes.relocate(91, 106);
         textAreaDetalhes.setPrefSize(347, 188);
         textAreaDetalhes.editableProperty().setValue(false);
-        textAreaDetalhes.wrapTextProperty().setValue(true);
-        textAreaDetalhes.setText("Descrição do produto\n\n" +
-                "Modelo: Camisa Polo\n" +
-                "Marca: Polo\n" +
-                "Sexo: Feminino\n" +
-                "Cor: Azul\n" +
-                "Tamanho: G\n" +
-                "Tecido: Algodão\n" +
-                "Descrição: Uma camisa elegante, bonita e adequada para o dia a dia e, também, para ocasiões especiais.");
+        textAreaDetalhes.setWrapText(true);
     }
 
     @Override
     public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada) {
+        this.roupaSelecionada = roupaSelecionada;
+        carregarDetalhes();
         return pane;
+    }
+
+    private void carregarDetalhes() {
+        textAreaDetalhes.setText("                    Descrição do produto\n\n" +
+                "Modelo: " + roupaSelecionada.getModelo() +
+                "\nMarca: " + roupaSelecionada.getMarca() +
+                "\nSexo: " + roupaSelecionada.getSexo().getNome() +
+                "\nCor: " + roupaSelecionada.getCor() +
+                "\nTamanho: " + roupaSelecionada.getTamanho() +
+                "\nTecido: " + roupaSelecionada.getTecido().getNome() +
+                "\nDescrição: " + roupaSelecionada.getDescricao());
     }
 
     @Override
