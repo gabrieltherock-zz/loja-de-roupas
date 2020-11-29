@@ -151,12 +151,11 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
 
     @Override
     public void acionarComando(String comando) {
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaa");
-//        try {
-//            roupaControl.salvarRoupa();
-//        } catch (RoupaException e) {
-//            e.printStackTrace();
-//        }
-        this.acionarComando(comando);
+        try {
+            roupaControl.salvarRoupa();
+        } catch (RoupaException e) {
+            e.printStackTrace();
+        }
+        this.assinanteComando.executarComando(comando);
     }
 }

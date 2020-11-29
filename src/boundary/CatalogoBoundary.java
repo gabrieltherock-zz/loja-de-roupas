@@ -49,13 +49,6 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
     public CatalogoBoundary() throws FileNotFoundException {
 
-        try {
-            roupas = roupaControl.carregarRoupasView();
-        } catch (RoupaException e) {
-            new Alert(Alert.AlertType.ERROR, "Erro ao se cadastrar!");
-            e.printStackTrace();
-        }
-
         pane.getChildren().addAll(labelInfo, buttonComprar, tableViewProducts, imageView);
 
         labelInfo.relocate(100, 232);
@@ -78,13 +71,17 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         tableColumnModelo.setCellValueFactory(new PropertyValueFactory<RoupasView, String>("modelo"));
         tableColumnMarca.setCellValueFactory(new PropertyValueFactory<RoupasView, String>("marca"));
         tableColumnPreco.setCellValueFactory(new PropertyValueFactory<RoupasView, String>("preco"));
-
-        tableViewProducts.setItems(FXCollections.observableArrayList(roupas));
-
     }
 
     @Override
     public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
+        try {
+            roupas = roupaControl.carregarRoupasView();
+        } catch (RoupaException e) {
+            new Alert(Alert.AlertType.ERROR, "Erro ao se cadastrar!");
+            e.printStackTrace();
+        }
+        tableViewProducts.setItems(FXCollections.observableArrayList(roupas));
         return pane;
     }
 
