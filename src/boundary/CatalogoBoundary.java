@@ -50,7 +50,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     public CatalogoBoundary() throws FileNotFoundException {
 
         try {
-            roupas = roupaControl.carregarRoupas();
+            roupas = roupaControl.carregarRoupasView();
         } catch (RoupaException e) {
             new Alert(Alert.AlertType.ERROR, "Erro ao se cadastrar!");
             e.printStackTrace();
@@ -97,7 +97,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     public void acionarComando(String comando) {
         roupaSelecionada.setId(tableViewProducts.getSelectionModel().getFocusedIndex() + 1);
         try {
-            roupaSelecionada = roupaControl.encontrarRoupa(roupaSelecionada);
+            roupaSelecionada = roupaControl.carregarRoupa(roupaSelecionada);
         } catch (RoupaException e) {
             e.printStackTrace();
         }

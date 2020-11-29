@@ -31,6 +31,14 @@ public enum Tecido {
         return null;
     }
 
+    public static Tecido getByNome(String nome) {
+        for (Tecido t : values()) {
+            if (t.nome.equals(nome))
+                return t;
+        }
+        return null;
+    }
+
     public Integer getId() {
         return id;
     }

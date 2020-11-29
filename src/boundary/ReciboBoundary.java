@@ -11,7 +11,6 @@ import model.entity.Recibo;
 import model.entity.Roupa;
 import model.entity.Usuario;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 public class ReciboBoundary implements PaneStrategy, ProdutorComando {

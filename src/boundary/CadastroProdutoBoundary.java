@@ -1,10 +1,16 @@
 package boundary;
 
+import control.RoupaControl;
+import dao.exceptions.RoupaException;
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.util.StringConverter;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import model.entity.Compra;
 import model.entity.Endereco;
 import model.entity.Roupa;
@@ -44,8 +50,29 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
 
     private Button buttonCadastrarProduto = new Button("Cadastrar");
 
-    @Override
-    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
+    private RoupaControl roupaControl = new RoupaControl();
+
+    public void vincularCampos() {
+        StringConverter<? extends Number> numeroConverter = new IntegerStringConverter();
+        StringConverter<? extends Number> numeroConverter1 = new DoubleStringConverter();
+        Bindings.bindBidirectional(comboBoxTamanho.valueProperty(), roupaControl.getTamanhoProperty());
+        Bindings.bindBidirectional(comboBoxTecido.valueProperty(), roupaControl.getTecidoProperty());
+        Bindings.bindBidirectional(comboBoxSexo.valueProperty(), roupaControl.getSexoProperty());
+        Bindings.bindBidirectional(	textFieldQuantidade.textProperty(),
+                roupaControl.getQuantidadeProperty(),
+                (StringConverter<Number>) numeroConverter);
+        Bindings.bindBidirectional(textFieldMarca.textProperty(), roupaControl.getMarcaProperty());
+        Bindings.bindBidirectional(textFieldModelo.textProperty(), roupaControl.getModeloProperty());
+        Bindings.bindBidirectional(textFieldCor.textProperty(), roupaControl.getCorProperty());
+        Bindings.bindBidirectional(textFieldDescricao.textProperty(), roupaControl.getDescricaoProperty());
+        Bindings.bindBidirectional(	textFieldValor.textProperty(),
+                roupaControl.getValorProperty(),
+                (StringConverter<Number>) numeroConverter1);
+    }
+
+    public CadastroProdutoBoundary() {
+        vincularCampos();
+
         pane.getChildren().addAll(labelTamanho, labelTecido, labelSexo, labelQuantidade, labelMarca, labelModelo,
                 labelCor, labelDescricao, labelValor, comboBoxTamanho, comboBoxTecido, comboBoxSexo, textFieldQuantidade,
                 textFieldMarca, textFieldModelo, textFieldCor, textFieldDescricao, textFieldValor, buttonCadastrarProduto
@@ -109,8 +136,11 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
         buttonCadastrarProduto.setMinSize(121, 65);
         buttonCadastrarProduto.setStyle("-fx-font-size:30");
         buttonCadastrarProduto.relocate(348, 312);
-//        buttonCadastrarProduto.setOnAction(e -> acionarComando("acessar"));
+        buttonCadastrarProduto.setOnAction(e -> acionarComando("acessar"));
+    }
 
+    @Override
+    public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
         return pane;
     }
 
@@ -121,6 +151,12 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
 
     @Override
     public void acionarComando(String comando) {
-
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaa");
+//        try {
+//            roupaControl.salvarRoupa();
+//        } catch (RoupaException e) {
+//            e.printStackTrace();
+//        }
+        this.acionarComando(comando);
     }
 }

@@ -28,4 +28,12 @@ public enum Sexo {
         }
         return null;
     }
+
+    public static Sexo getByNome(String nome) {
+        for (Sexo s : values()) {
+            if (s.nome.equals(nome))
+                return s;
+        }
+        return null;
+    }
 }

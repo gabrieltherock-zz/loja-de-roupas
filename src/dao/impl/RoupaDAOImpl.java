@@ -2,6 +2,7 @@ package dao.impl;
 
 import boundary.view.RoupasView;
 import dao.RoupaDAO;
+import dao.exceptions.CompraException;
 import dao.exceptions.RoupaException;
 import model.entity.Roupa;
 import model.enums.Sexo;
@@ -21,7 +22,7 @@ import java.util.List;
 public class RoupaDAOImpl implements RoupaDAO {
 
     @Override
-    public List<RoupasView> carregarProdutos() throws RoupaException {
+    public List<RoupasView> carregarRoupasView() throws RoupaException {
         List<RoupasView> roupas = new ArrayList<>();
         try {
             Connection con = ConnectionSingleton.instancia().connection();
@@ -43,7 +44,7 @@ public class RoupaDAOImpl implements RoupaDAO {
     }
 
     @Override
-    public Roupa retornarRoupa(Roupa roupa) throws RoupaException {
+    public Roupa carregarRoupa(Roupa roupa) throws RoupaException {
         try {
             Connection con = ConnectionSingleton.instancia().connection();
             String sql = "SELECT * FROM roupas WHERE roupa_id='" + roupa.getId() + "'";
@@ -68,6 +69,34 @@ public class RoupaDAOImpl implements RoupaDAO {
     }
 
     @Override
+    public Roupa salvarRoupa(Roupa roupa) throws RoupaException {
+        try {
+            Connection con = ConnectionSingleton.instancia().connection();
+            String sql = "INSERT INTO roupas (tamanho_id, tecido_id, sexo_id, quantidade, marca, modelo, cor, descricao, valor) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            st.setLong(1, roupa.getTamanho().getId());
+            st.setLong(2,  roupa.getTecido().getId());
+            st.setLong(3, roupa.getSexo().getId());
+            st.setInt(4, roupa.getQuantidade());
+            st.setString(5, roupa.getMarca());
+            st.setString(6, roupa.getModelo());
+            st.setString(7, roupa.getCor());
+            st.setString(8, roupa.getDescricao());
+            st.setDouble(9, roupa.getValor());
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            rs.first();
+            roupa.setId(rs.getLong(1));
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RoupaException(e);
+        }
+        return roupa;
+    }
+
+    @Override
     public Roupa atualizarRoupa(Roupa roupa) throws RoupaException {
         try {
             Connection con = ConnectionSingleton.instancia().connection();
@@ -77,7 +106,7 @@ public class RoupaDAOImpl implements RoupaDAO {
             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             st.executeUpdate();
             con.close();
-            roupa = retornarRoupa(roupa);
+            roupa = carregarRoupa(roupa);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RoupaException(e);
