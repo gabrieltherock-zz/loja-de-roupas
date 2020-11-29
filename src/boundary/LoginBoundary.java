@@ -158,6 +158,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
         pane.getChildren().clear();
         pane.getChildren().add(paneStrategy.getPane(USUARIO_LOGADO, ROUPA_SELECIONADA, COMPRA_REALIZADA, ENDERECO_ENTREGA));
     }
+
     public static void setUsuarioLogado(Usuario usuario) {
         USUARIO_LOGADO = usuario;
     }

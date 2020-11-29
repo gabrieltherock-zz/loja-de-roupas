@@ -25,6 +25,8 @@ import java.util.List;
 
 public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
+    private Usuario usuarioLogado = new Usuario();
+
     private Roupa roupaSelecionada = new Roupa();
 
     private AssinanteComando assinanteComando;
@@ -34,6 +36,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     private Label labelInfo = new Label("Selecione um produto e clique no ícone abaixo para mostrar detalhes");
 
     private Button buttonComprar = new Button("Comprar");
+    private Button buttonCadastrarOutro = new Button("Cadastrar outro");
 
     private TableView<RoupasView> tableViewProducts = new TableView();
     private TableColumn tableColumnModelo = new TableColumn("Modelo");
@@ -49,7 +52,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
     public CatalogoBoundary() throws FileNotFoundException {
 
-        pane.getChildren().addAll(labelInfo, buttonComprar, tableViewProducts, imageView);
+        pane.getChildren().addAll(labelInfo, tableViewProducts, imageView);
 
         labelInfo.relocate(100, 232);
         labelInfo.setFont(Font.font(11));
@@ -61,6 +64,10 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         buttonComprar.relocate(223, 264);
         buttonComprar.setPrefSize(192, 58);
         buttonComprar.setOnAction(e -> this.acionarComando("comprar"));
+
+        buttonCadastrarOutro.relocate(223, 264);
+        buttonCadastrarOutro.setPrefSize(192, 58);
+        buttonCadastrarOutro.setOnAction(e -> this.acionarComando("acessar cadastro de produto"));
 
         tableViewProducts.setEditable(false);
         tableViewProducts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -75,12 +82,23 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
     @Override
     public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
+        this.usuarioLogado = usuarioLogado;
+
+        if(this.usuarioLogado.getEmail().equals("admin@admin.com")) {
+            pane.getChildren().remove(buttonCadastrarOutro);
+            pane.getChildren().add(buttonCadastrarOutro);
+        } else {
+            pane.getChildren().remove(buttonComprar);
+            pane.getChildren().add(buttonComprar);
+        }
+
         try {
             roupas = roupaControl.carregarRoupasView();
         } catch (RoupaException e) {
             new Alert(Alert.AlertType.ERROR, "Erro ao se cadastrar!");
             e.printStackTrace();
         }
+
         tableViewProducts.setItems(FXCollections.observableArrayList(roupas));
         return pane;
     }
