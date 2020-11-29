@@ -145,8 +145,6 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
             paneStrategy = compraBoundary;
         else if ("detalhes".equals(comando))
             paneStrategy = detalhesBoundary;
-        else if ("voltar".equals(comando))
-            paneStrategy = catalogoBoundary;
         else if ("realizar compra".equals(comando))
             paneStrategy = reciboBoundary;
         else if ("voltar para catalogo".equals(comando))

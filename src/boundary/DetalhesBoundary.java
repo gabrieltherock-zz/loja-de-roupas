@@ -25,7 +25,7 @@ public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
 
         buttonVoltar.relocate(212, 317);
         buttonVoltar.setPrefSize(105, 27);
-        buttonVoltar.setOnAction(e -> this.acionarComando("voltar"));
+        buttonVoltar.setOnAction(e -> this.acionarComando("voltar para catalogo"));
 
         textAreaDetalhes.relocate(91, 106);
         textAreaDetalhes.setPrefSize(347, 188);
