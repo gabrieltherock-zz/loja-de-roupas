@@ -60,14 +60,14 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
 
         //Item
         labelItem.relocate(33,85);
-        labelItem.setStyle("-fx-font-size:20");
-        labelModeloRoupa.setStyle("-fx-font-size:24");
+        labelItem.setStyle("-fx-font-size:20; -fx-text-fill:white;");
+        labelModeloRoupa.setStyle("-fx-font-size:24; -fx-text-fill:white;");
         labelModeloRoupa.relocate(33, 109);
         labelModeloRoupa.setMaxSize(180, 32);
 
         //Quantidade
         labelQuantidade.relocate(215,111);
-        labelQuantidade.setStyle("-fx-font-size:20");
+        labelQuantidade.setStyle("-fx-font-size:20; -fx-text-fill:white;");
         spinnerQuantidade.relocate(338, 113);
         spinnerQuantidade.setMinWidth(110);
         spinnerQuantidade.setMaxWidth(110);
@@ -76,25 +76,28 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
             quantidade = spinnerQuantidade.getValue();
             aplicaDesconto();
         });
+        spinnerQuantidade.setStyle("-fx-background-color: white");
 
         //Total
         labelTotal.relocate(33,172);
-        labelTotal.setStyle("-fx-font-size:20");
-        labelValor.setStyle("-fx-font-size:24");
+        labelTotal.setStyle("-fx-font-size:20; -fx-text-fill:white;");
+        labelValor.setStyle("-fx-font-size:24; -fx-text-fill:white;");
         labelValor.relocate(33, 200);
         labelValor.setMaxSize(180, 32);
 
         //Pagamento
         labelFormadePagamento.relocate(215, 172);
-        labelFormadePagamento.setStyle("-fx-font-size:20");
+        labelFormadePagamento.setStyle("-fx-font-size:20; -fx-text-fill:white;");
         comboBoxFormadePagamento.relocate(415, 175);
         comboBoxFormadePagamento.setMinWidth(110);
         comboBoxFormadePagamento.setMaxWidth(110);
         comboBoxFormadePagamento.getItems().addAll(Arrays.stream(Pagamento.values())
                 .map(Pagamento::getNome)
                 .collect(Collectors.toList()));
+        comboBoxFormadePagamento.setStyle("-fx-background-color: white");
         labelDesconto.setVisible(false);
         labelDesconto.relocate(425, 200);
+        labelDesconto.setStyle("-fx-text-fill:white;");
 
         buttonComprar.setOnAction(e -> {
             pagamento = Pagamento.getById(comboBoxFormadePagamento.getSelectionModel().getSelectedIndex() + 1);

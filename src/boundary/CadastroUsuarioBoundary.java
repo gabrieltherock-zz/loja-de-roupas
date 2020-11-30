@@ -79,51 +79,61 @@ public class CadastroUsuarioBoundary implements PaneStrategy, ProdutorComando{
         
         //1 Nome
         labelNome.relocate(16,55);
+        labelNome.setStyle("-fx-text-fill:white;");
         textFieldNome.setMinSize(155, 27);
         textFieldNome.relocate(110,52);
         
         //2 CPF
         labelCpf.relocate(306,55);
+        labelCpf.setStyle("-fx-text-fill:white;");
         textFieldCpf.setMinSize(155, 27);
         textFieldCpf.relocate(359, 52);
         
         //3 Email
         labelEmail.relocate(16,109);
+        labelEmail.setStyle("-fx-text-fill:white;");
         textFieldEmail.setMinSize(155, 27);
         textFieldEmail.relocate(110,106);
         
         //4 Senha
         labelSenha.relocate(306, 109);
+        labelSenha.setStyle("-fx-text-fill:white;");
         textFieldSenha.setMinSize(155, 27);
         textFieldSenha.relocate(359, 106);
 
         //5 Telefone
         labelTelefone.relocate(16,165);
+        labelTelefone.setStyle("-fx-text-fill:white;");
         textFieldTelefone.setMinSize(155, 27);
         textFieldTelefone.relocate(110,159);
         
         //6 CEP
         labelCep.relocate(306,165);
+        labelCep.setStyle("-fx-text-fill:white;");
         textFieldCep.setMinSize(155, 27);
         textFieldCep.relocate(359,159);
 
         //7 Numero
         labelNumero.relocate(16,217);
+        labelNumero.setStyle("-fx-text-fill:white;");
         textFieldNumero.setMinSize(155, 27);
         textFieldNumero.relocate(110,214);
         
         //8 Rua
         labelRua.relocate(307,217);
+        labelRua.setStyle("-fx-text-fill:white;");
         textFieldRua.setMinSize(155, 27);
         textFieldRua.relocate(359,214);
         
         //9 Ponto de referencia
         labelReferencia.relocate(16,269);
+        labelReferencia.setStyle("-fx-text-fill:white;");
         textFieldReferencia.setMinSize(155, 27);
         textFieldReferencia.relocate(110,266);
 
         //10 Complemento
         labelComplemento.relocate(306, 269);
+        labelComplemento.setStyle("-fx-text-fill:white;");
         textFieldComplemento.setMinSize(155, 27);
         textFieldComplemento.relocate(359, 266);
         
@@ -131,6 +141,7 @@ public class CadastroUsuarioBoundary implements PaneStrategy, ProdutorComando{
         buttonCadastrarUsuario.setStyle("-fx-font-size:30");
         buttonCadastrarUsuario.relocate(348, 312);
         buttonCadastrarUsuario.setOnAction(e -> acionarComando("acessar"));
+        buttonCadastrarUsuario.setStyle("-fx-background-color: white");
     }
 
     @Override

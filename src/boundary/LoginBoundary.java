@@ -28,12 +28,12 @@ import java.io.FileNotFoundException;
 
 public class LoginBoundary extends Application implements EventHandler<ActionEvent>, AssinanteComando {
 
-    private Pane pane = new Pane();
-
     private static Usuario USUARIO_LOGADO = new Usuario();
     private static Roupa ROUPA_SELECIONADA = new Roupa();
     private static Compra COMPRA_REALIZADA = new Compra();
     private static Endereco ENDERECO_ENTREGA = new Endereco();
+
+    private Pane pane = new Pane();
 
     private CadastroUsuarioBoundary cadastroUsuarioBoundary = new CadastroUsuarioBoundary();
     private CatalogoBoundary catalogoBoundary = new CatalogoBoundary();
@@ -74,6 +74,8 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
 
         Scene scene = new Scene(pane, 530, 400);
 
+        pane.setStyle("-fx-background-color:#4FB564;");
+
         pane.getChildren().addAll(labelEmail, labelSenha,
                 textFieldEmail, passwordFieldSenha,
                 buttonCadastrar, buttonAcessar, imageView);
@@ -81,19 +83,21 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
         imageView.relocate(39, 55);
 
         labelEmail.relocate(203,70);
+        labelEmail.setStyle("-fx-text-fill:white; -fx-font-weight: bold;");
         textFieldEmail.setMinSize(202, 24);
         textFieldEmail.relocate(254,70);
 
         labelSenha.relocate(203,124);
+        labelSenha.setStyle("-fx-text-fill:white; -fx-font-weight: bold;");
         passwordFieldSenha.setMinSize(202, 24);
         passwordFieldSenha.relocate(254, 124);
 
         buttonCadastrar.setMinSize(176, 81);
-        buttonCadastrar.setStyle("-fx-font-size:30");
+        buttonCadastrar.setStyle("-fx-font-size:30; -fx-background-color: white;");
         buttonCadastrar.relocate(52, 226);
 
         buttonAcessar.setMinSize(176, 81);
-        buttonAcessar.setStyle("-fx-font-size:30");
+        buttonAcessar.setStyle("-fx-font-size:30; -fx-background-color: white;");
         buttonAcessar.relocate(283, 226);
 
         buttonCadastrar.setOnAction(this);

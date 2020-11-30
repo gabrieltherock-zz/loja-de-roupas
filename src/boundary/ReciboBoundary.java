@@ -40,20 +40,23 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
         pane.getChildren().addAll(buttonVoltar, buttonSair, textAreaDetalhes, labelTitulo);
 
         labelTitulo.relocate(190, 56);
-        labelTitulo.setFont(Font.font(20));
+        labelTitulo.setStyle("-fx-font-size:20; -fx-text-fill:white;");
 
         buttonVoltar.relocate(91, 317);
         buttonVoltar.setPrefSize(105, 27);
         buttonVoltar.setOnAction(e -> this.acionarComando("voltar para catalogo"));
+        buttonVoltar.setStyle("-fx-background-color: white");
 
         buttonSair.relocate(333, 317);
         buttonSair.setPrefSize(105, 27);
         buttonSair.setOnAction(e -> this.acionarComando("sair"));
+        buttonSair.setStyle("-fx-background-color: white");
 
         textAreaDetalhes.relocate(91, 106);
         textAreaDetalhes.setPrefSize(347, 188);
         textAreaDetalhes.editableProperty().setValue(false);
         textAreaDetalhes.setWrapText(true);
+        textAreaDetalhes.setStyle("-fx-background-color: white");
     }
 
     @Override

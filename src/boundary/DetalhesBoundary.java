@@ -28,16 +28,18 @@ public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
         pane.getChildren().addAll(buttonVoltar, textAreaDetalhes, labelTitulo);
 
         labelTitulo.relocate(180, 56);
-        labelTitulo.setFont(Font.font(20));
+        labelTitulo.setStyle("-fx-font-size:20; -fx-text-fill:white;");
 
         buttonVoltar.relocate(212, 317);
         buttonVoltar.setPrefSize(105, 27);
         buttonVoltar.setOnAction(e -> this.acionarComando("voltar para catalogo"));
+        buttonVoltar.setStyle("-fx-background-color: white");
 
         textAreaDetalhes.relocate(91, 106);
         textAreaDetalhes.setPrefSize(347, 188);
         textAreaDetalhes.editableProperty().setValue(false);
         textAreaDetalhes.setWrapText(true);
+        textAreaDetalhes.setStyle("-fx-background-color: white");
     }
 
     @Override

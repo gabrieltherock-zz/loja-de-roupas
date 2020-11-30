@@ -77,55 +77,67 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
 
         //1 Tecido
         labelTecido.relocate(16,55);
+        labelTecido.setStyle("-fx-text-fill:white;");
         comboBoxTecido.setMinSize(155, 27);
         comboBoxTecido.relocate(110,52);
         comboBoxTecido.getItems().addAll(Arrays.stream(Tecido.values())
                 .map(Tecido::getNome)
                 .collect(Collectors.toList()));
+        comboBoxTecido.setStyle("-fx-background-color: white");
 
         //2 Tamanho
         labelTamanho.relocate(306,55);
+        labelTamanho.setStyle("-fx-text-fill:white;");
         comboBoxTamanho.setMinSize(155, 27);
         comboBoxTamanho.relocate(359, 52);
         comboBoxTamanho.getItems().addAll(Arrays.stream(Tamanho.values())
                 .map(Enum::name)
                 .collect(Collectors.toList()));
+        comboBoxTamanho.setStyle("-fx-background-color: white");
 
         //3 Sexo
         labelSexo.relocate(16,109);
+        labelSexo.setStyle("-fx-text-fill:white;");
         comboBoxSexo.setMinSize(155, 27);
         comboBoxSexo.relocate(110,106);
         comboBoxSexo.getItems().addAll(Arrays.stream(Sexo.values())
                 .map(Sexo::getNome)
                 .collect(Collectors.toList()));
+        comboBoxSexo.setStyle("-fx-background-color: white");
 
         //4 Quantidade
         labelQuantidade.relocate(306, 109);
+        labelQuantidade.setStyle("-fx-text-fill:white;");
         textFieldQuantidade.setMinSize(155, 27);
         textFieldQuantidade.relocate(359, 106);
 
         //5 Marca
         labelMarca.relocate(16,165);
+        labelMarca.setStyle("-fx-text-fill:white;");
         textFieldMarca.setMinSize(155, 27);
         textFieldMarca.relocate(110,159);
 
         //6 Modelo
         labelModelo.relocate(306,165);
+        labelModelo.setStyle("-fx-text-fill:white;");
         textFieldModelo.setMinSize(155, 27);
         textFieldModelo.relocate(359,159);
 
         //7 Cor
         labelCor.relocate(16,217);
+        labelCor.setStyle("-fx-text-fill:white;");
         textFieldCor.setMinSize(155, 27);
         textFieldCor.relocate(110,214);
 
         //8 Descricao
         labelDescricao.relocate(307,217);
+        labelDescricao.setStyle("-fx-text-fill:white;");
         textFieldDescricao.setMinSize(155, 27);
         textFieldDescricao.relocate(359,214);
 
         //9 Ponto de Valor
         labelValor.relocate(16,269);
+        labelValor.setStyle("-fx-text-fill:white;");
         textFieldValor.setMinSize(155, 27);
         textFieldValor.relocate(110,266);
 
@@ -133,6 +145,7 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
         buttonCadastrarProduto.setStyle("-fx-font-size:30");
         buttonCadastrarProduto.relocate(348, 312);
         buttonCadastrarProduto.setOnAction(e -> acionarComando("acessar"));
+        buttonCadastrarProduto.setStyle("-fx-background-color: white");
     }
 
     @Override

@@ -55,10 +55,10 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         pane.getChildren().addAll(labelInfo, labelTitulo, tableViewProducts, imageView);
 
         labelInfo.relocate(65, 232);
-        labelInfo.setFont(Font.font(13));
+        labelInfo.setStyle("-fx-font-size:13; -fx-text-fill:white;");
 
         labelTitulo.relocate(176, 50);
-        labelTitulo.setFont(Font.font(20));
+        labelTitulo.setStyle("-fx-font-size:20; -fx-text-fill:white;");
 
         imageView.relocate(115, 269);
         imageView.resize(48, 48);
@@ -67,16 +67,19 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         buttonComprar.relocate(223, 264);
         buttonComprar.setPrefSize(192, 58);
         buttonComprar.setOnAction(e -> this.acionarComando("comprar"));
+        buttonComprar.setStyle("-fx-background-color: white");
 
         buttonCadastrarOutro.relocate(223, 264);
         buttonCadastrarOutro.setPrefSize(192, 58);
         buttonCadastrarOutro.setOnAction(e -> this.acionarComando("acessar cadastro de produto"));
+        buttonCadastrarOutro.setStyle("-fx-background-color: white");
 
         tableViewProducts.setEditable(false);
         tableViewProducts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableViewProducts.relocate(60, 98);
         tableViewProducts.setPrefSize(410, 126);
         tableViewProducts.getColumns().addAll(tableColumnModelo, tableColumnMarca, tableColumnPreco);
+        tableViewProducts.setStyle("-fx-background-color: white");
 
         tableColumnModelo.setCellValueFactory(new PropertyValueFactory<RoupasView, String>("modelo"));
         tableColumnMarca.setCellValueFactory(new PropertyValueFactory<RoupasView, String>("marca"));
