@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 
 public class ReciboBoundary implements PaneStrategy, ProdutorComando {
 
+    private Usuario usuarioLogado = new Usuario();
     private Recibo reciboGerado = new Recibo();
 
     private Endereco enderecoEntrega = new Endereco();
@@ -61,6 +62,7 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
 
     @Override
     public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
+        this.usuarioLogado = usuarioLogado;
         reciboGerado.setCompra(compraRealizada);
         this.enderecoEntrega = enderecoEntrega;
         try {
@@ -80,6 +82,8 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
     private void carregarDetalhes() {
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         textAreaDetalhes.setText("Código da compra: " + reciboGerado.getCompra().getId() +
+                "\nNome do comprador: " + usuarioLogado.getNome() +
+                "\nCPF do comprador: " + usuarioLogado.getCpf() +
                 "\nEndereço de entrega: " + enderecoEntrega.getRua() + ", número " + enderecoEntrega.getNumero() +
                 ", " + enderecoEntrega.getComplemento() +
                 "\nProduto comprado: " + reciboGerado.getCompra().getRoupa().getModelo() +

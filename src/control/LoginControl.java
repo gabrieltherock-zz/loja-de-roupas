@@ -9,8 +9,8 @@ import model.entity.Usuario;
 
 public class LoginControl {
 
-    private StringProperty emailProperty = new SimpleStringProperty("gabriel@gmail.com");
-    private StringProperty senhaProperty = new SimpleStringProperty("123");
+    private StringProperty emailProperty = new SimpleStringProperty();
+    private StringProperty senhaProperty = new SimpleStringProperty();
 
     LoginDAO loginDAO = new LoginDAOImpl();
 
