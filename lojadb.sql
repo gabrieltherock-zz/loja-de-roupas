@@ -1,6 +1,8 @@
 create database lojadb;
 use lojadb;
 
+ALTER DATABASE lojadb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 create table usuarios (
 	USUARIO_ID int auto_increment primary key,
 	NOME varchar(40) not null,
