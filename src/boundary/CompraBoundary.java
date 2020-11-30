@@ -63,6 +63,7 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
         labelItem.setStyle("-fx-font-size:20");
         labelModeloRoupa.setStyle("-fx-font-size:24");
         labelModeloRoupa.relocate(33, 109);
+        labelModeloRoupa.setMaxSize(135, 32);
 
         //Quantidade
         labelQuantidade.relocate(215,111);
@@ -81,6 +82,7 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
         labelTotal.setStyle("-fx-font-size:20");
         labelValor.setStyle("-fx-font-size:24");
         labelValor.relocate(33, 200);
+        labelValor.setMaxSize(135, 32);
 
         //Pagamento
         labelFormadePagamento.relocate(215, 172);

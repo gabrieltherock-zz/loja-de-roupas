@@ -69,15 +69,15 @@ create table recibos (
 
 insert into usuarios (NOME, CPF, EMAIL, SENHA, TELEFONE) values
 ('ADMIN', '00000000000', 'admin@admin.com', 'admin', '00000000000'),
-('GABRIEL', '78912345610', 'gabriel@gmail.com', 'spfc', '11976887687'),
-('KARINE', '85589345610', 'karine@gmail.com', 'nulo', '11996317687'),
-('RODRIGO', '87742345610', 'rodrigo@gmail.com', 'flamengo', '11924117687');
+('GABRIEL', '78912345610', 'gabriel@gmail.com', '123', '11976887687'),
+('KARINE', '85589345610', 'karine@gmail.com', '123', '11996317687'),
+('RODRIGO', '87742345610', 'rodrigo@gmail.com', '123', '11924117687');
 
 insert into enderecos (USUARIO_ID, CEP, RUA, NUMERO, COMPLEMENTO, REFERENCIA) values
-(1, '00000000', 'Rua Fatec Zona Leste', 10000, 'Portao marrom', 'Proximo ao terminal AE Carvalho'),
-(2, '96968370', 'Rua Morumbi', 20, 'Muitos titulos', 'Fica no Morumbi'),
-(3, '08948678', 'Rua Grande Craque Neto', 30, 'Portao do curinthia', 'Proximo daquele lugar'),
-(4, '59355472', 'Rua Maracana', 40, 'Eh o Flamengo', 'La no RJ');
+(1, '00000000', 'Rua Fatec Zona Leste', 10000, 'portao marrom', 'proximo ao terminal AE Carvalho'),
+(2, '96968370', 'Rua Morumbi', 20, 'portao azul', 'proximo a estacao'),
+(3, '08948678', 'Rua Vila Belmiro', 30, 'portao branco', 'proximo a praia'),
+(4, '59355472', 'Rua Maracana', 40, 'portao vermelho', 'proximo do Cristo Redentor');
 
 insert into tamanhos (TAMANHO) values
 ('PP'), ('P'), ('M'), ('G'), ('GG');
@@ -89,18 +89,12 @@ insert into sexos (SEXO) values
 ('Masculino'), ('Feminino'), ('Unissex');
 
 insert into roupas (TAMANHO_ID, TECIDO_ID, SEXO_ID, QUANTIDADE, MARCA, MODELO, COR, DESCRICAO, VALOR) values
-(1, 1, 1, 60, 'Nike', 'Calca ecologica', 'Azul', 'Uma bela calca. Ecologica e agradavel de usar!', 99),
-(1, 2, 3, 100, 'Adidas', 'Camisa ecologica', 'Preto', 'Uma camisa confortavel, muito bonita e ecologica!', 70),
-(2, 3, 1, 80, 'Topper', 'Tenis de corrida', 'Branco', 'Tenis muito estiloso e totalmente pensado para corridas!', 110);
+(1, 4, 1, 60, 'Nike', 'Calca boca de sino', 'Azul', 'Uma bela calca. Ecologica e agradavel de usar!', 99),
+(2, 3, 2, 100, 'Adidas', 'Camisa de botao', 'Preto', 'Uma camisa confortavel, muito bonita e ecologica!', 70),
+(3, 6, 3, 80, 'Topper', 'Meia de inverno', 'Branco', 'Uma meia muito estilosa que esquenta muito bem!', 110);
 
 insert into pagamentos (PAGAMENTO) values
 ('Boleto'), ('Credito'), ('Debito');
-
-insert into compras (USUARIO_ID, ROUPA_ID, PAGAMENTO_ID, QUANTIDADE, TOTAL) values
-(1, 1, 1, 30, 2970);
-
-insert into recibos(COMPRA_ID, DATA) values
-(1, '2020-11-19 03:14:07');
 
 select * from usuarios;
 select * from enderecos;
@@ -109,5 +103,3 @@ select * from tecidos;
 select * from sexos;
 select * from roupas;
 select * from pagamentos;
-select * from compras;
-select * from recibos;

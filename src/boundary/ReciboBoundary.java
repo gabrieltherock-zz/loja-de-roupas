@@ -39,7 +39,7 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
     public ReciboBoundary() {
         pane.getChildren().addAll(buttonVoltar, buttonSair, textAreaDetalhes, labelTitulo);
 
-        labelTitulo.relocate(173, 56);
+        labelTitulo.relocate(190, 56);
         labelTitulo.setFont(Font.font(20));
 
         buttonVoltar.relocate(91, 317);

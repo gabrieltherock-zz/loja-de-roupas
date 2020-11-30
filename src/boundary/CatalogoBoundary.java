@@ -54,8 +54,8 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
         pane.getChildren().addAll(labelInfo, labelTitulo, tableViewProducts, imageView);
 
-        labelInfo.relocate(100, 232);
-        labelInfo.setFont(Font.font(11));
+        labelInfo.relocate(65, 232);
+        labelInfo.setFont(Font.font(13));
 
         labelTitulo.relocate(176, 50);
         labelTitulo.setFont(Font.font(20));
@@ -74,8 +74,8 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
         tableViewProducts.setEditable(false);
         tableViewProducts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tableViewProducts.relocate(115, 98);
-        tableViewProducts.setPrefSize(309, 126);
+        tableViewProducts.relocate(60, 98);
+        tableViewProducts.setPrefSize(410, 126);
         tableViewProducts.getColumns().addAll(tableColumnModelo, tableColumnMarca, tableColumnPreco);
 
         tableColumnModelo.setCellValueFactory(new PropertyValueFactory<RoupasView, String>("modelo"));

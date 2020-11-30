@@ -27,7 +27,7 @@ public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
     public DetalhesBoundary() {
         pane.getChildren().addAll(buttonVoltar, textAreaDetalhes, labelTitulo);
 
-        labelTitulo.relocate(173, 56);
+        labelTitulo.relocate(180, 56);
         labelTitulo.setFont(Font.font(20));
 
         buttonVoltar.relocate(212, 317);
