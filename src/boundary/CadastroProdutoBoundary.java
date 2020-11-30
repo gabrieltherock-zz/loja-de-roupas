@@ -3,10 +3,7 @@ package boundary;
 import control.RoupaControl;
 import dao.exceptions.RoupaException;
 import javafx.beans.binding.Bindings;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
 import javafx.util.converter.DoubleStringConverter;
@@ -94,7 +91,6 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
                 .map(Enum::name)
                 .collect(Collectors.toList()));
 
-
         //3 Sexo
         labelSexo.relocate(16,109);
         comboBoxSexo.setMinSize(155, 27);
@@ -153,9 +149,14 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
     public void acionarComando(String comando) {
         try {
             roupaControl.salvarRoupa();
+            this.assinanteComando.executarComando(comando);
         } catch (RoupaException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Ocorreu um erro!");
+            alert.setContentText("Erro ao cadastrar produto!");
+            alert.showAndWait();
             e.printStackTrace();
         }
-        this.assinanteComando.executarComando(comando);
     }
 }

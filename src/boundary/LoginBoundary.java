@@ -53,8 +53,9 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
     private Button buttonCadastrar = new Button("Cadastrar");
     private Button buttonAcessar = new Button("Acessar");
 
-    private Image image = new Image(new FileInputStream(System.getProperty("user.dir") +"/images/key-icon.png"), 128, 128, false , false);
-    private ImageView imageView = new ImageView(image);
+    private Image imagemLogin = new Image(new FileInputStream(System.getProperty("user.dir") +"/images/key-icon.png"), 128, 128, false , false);
+    private ImageView imageView = new ImageView(imagemLogin);
+    private Image iconeStage = new Image(new FileInputStream(System.getProperty("user.dir") +"/images/store-icon.png"), 128, 128, false , false);
 
     LoginControl loginControl = new LoginControl();
     EnderecoControl enderecoControl = new EnderecoControl();
@@ -107,6 +108,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
 
         stage.setScene(scene);
         stage.setTitle("Loja de Roupas");
+        stage.getIcons().add(iconeStage);
         stage.show();
     }
 

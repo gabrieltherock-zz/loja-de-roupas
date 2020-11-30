@@ -4,10 +4,7 @@ import control.CompraControl;
 import control.RoupaControl;
 import dao.exceptions.CompraException;
 import dao.exceptions.RoupaException;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import model.entity.Compra;
 import model.entity.Endereco;
@@ -159,6 +156,11 @@ public class CompraBoundary implements PaneStrategy, ProdutorComando{
             LoginBoundary.setCompraRealizada(compra);
             LoginBoundary.setRoupaSelecionada(roupaSelecionada);
         } catch (CompraException | RoupaException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Ocorreu um erro!");
+            alert.setContentText("Erro ao realizar compra!");
+            alert.showAndWait();
             e.printStackTrace();
         }
     }

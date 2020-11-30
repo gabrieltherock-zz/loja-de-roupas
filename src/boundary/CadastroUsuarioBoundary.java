@@ -151,12 +151,15 @@ public class CadastroUsuarioBoundary implements PaneStrategy, ProdutorComando{
             endereco.setUsuario(usuario);
             LoginBoundary.setUsuarioLogado(usuario);
             LoginBoundary.setEnderecoEntrega(endereco);
+            this.assinanteComando.executarComando(comando);
         } catch (UsuarioException | EnderecoException e) {
-            new Alert(Alert.AlertType.ERROR, "Erro ao se cadastrar!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Ocorreu um erro!");
+            alert.setContentText("Erro ao cadastrar usuário!");
+            alert.showAndWait();
             e.printStackTrace();
         }
-        this.assinanteComando.executarComando(comando);
     }
-
 }
 

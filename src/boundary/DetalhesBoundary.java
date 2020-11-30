@@ -1,8 +1,10 @@
 package boundary;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import model.entity.Compra;
 import model.entity.Endereco;
 import model.entity.Roupa;
@@ -20,8 +22,13 @@ public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
 
     private TextArea textAreaDetalhes = new TextArea();
 
+    private Label labelTitulo = new Label("Detalhes do produto");
+
     public DetalhesBoundary() {
-        pane.getChildren().addAll(buttonVoltar, textAreaDetalhes);
+        pane.getChildren().addAll(buttonVoltar, textAreaDetalhes, labelTitulo);
+
+        labelTitulo.relocate(173, 56);
+        labelTitulo.setFont(Font.font(20));
 
         buttonVoltar.relocate(212, 317);
         buttonVoltar.setPrefSize(105, 27);
@@ -41,8 +48,7 @@ public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
     }
 
     private void carregarDetalhes() {
-        textAreaDetalhes.setText("                    Descrição do produto\n\n" +
-                "Modelo: " + roupaSelecionada.getModelo() +
+        textAreaDetalhes.setText("Modelo: " + roupaSelecionada.getModelo() +
                 "\nMarca: " + roupaSelecionada.getMarca() +
                 "\nSexo: " + roupaSelecionada.getSexo().getNome() +
                 "\nCor: " + roupaSelecionada.getCor() +

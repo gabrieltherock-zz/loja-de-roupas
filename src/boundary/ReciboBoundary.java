@@ -2,9 +2,12 @@ package boundary;
 
 import control.ReciboControl;
 import dao.exceptions.ReciboException;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import model.entity.Compra;
 import model.entity.Endereco;
 import model.entity.Recibo;
@@ -12,6 +15,7 @@ import model.entity.Roupa;
 import model.entity.Usuario;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 
 public class ReciboBoundary implements PaneStrategy, ProdutorComando {
 
@@ -28,10 +32,15 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
 
     private TextArea textAreaDetalhes = new TextArea();
 
+    private Label labelTitulo = new Label("Recibo da compra");
+
     private ReciboControl reciboControl = new ReciboControl();
 
     public ReciboBoundary() {
-        pane.getChildren().addAll(buttonVoltar, buttonSair, textAreaDetalhes);
+        pane.getChildren().addAll(buttonVoltar, buttonSair, textAreaDetalhes, labelTitulo);
+
+        labelTitulo.relocate(173, 56);
+        labelTitulo.setFont(Font.font(20));
 
         buttonVoltar.relocate(91, 317);
         buttonVoltar.setPrefSize(105, 27);
@@ -54,6 +63,11 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
         try {
             reciboGerado = reciboControl.salvarRecibo(reciboGerado);
         } catch (ReciboException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Ocorreu um erro!");
+            alert.setContentText("Erro ao salvar recibo!");
+            alert.showAndWait();
             e.printStackTrace();
         }
         carregarDetalhes();
@@ -61,13 +75,13 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
     }
 
     private void carregarDetalhes() {
-        textAreaDetalhes.setText("                    Recibo da compra\n" +
-                "\nCódigo da compra: " + reciboGerado.getCompra().getId() +
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        textAreaDetalhes.setText("Código da compra: " + reciboGerado.getCompra().getId() +
                 "\nEndereço de entrega: " + enderecoEntrega.getRua() + ", número " + enderecoEntrega.getNumero() +
                 ", " + enderecoEntrega.getComplemento() +
                 "\nProduto comprado: " + reciboGerado.getCompra().getRoupa().getModelo() +
-                "\nData e hora da compra: " + reciboGerado.getData() +
-                "\nQuantidade de itens comprados: " + reciboGerado.getCompra().getQuantidade() + " unidades" +
+                "\nData e hora da compra: " + fmt.format(reciboGerado.getData()) +
+                "\nQuantidade de itens comprados: " + reciboGerado.getCompra().getQuantidade() +
                 "\nForma de pagamento: " + reciboGerado.getCompra().getPagamento().getNome() +
                 "\nValor total: " + NumberFormat.getCurrencyInstance().format(reciboGerado.getCompra().getTotal()));
     }

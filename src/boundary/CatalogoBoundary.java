@@ -34,7 +34,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     private Pane pane = new Pane();
 
     private Label labelInfo = new Label("Selecione um produto e clique no ícone abaixo para mostrar detalhes");
-
+    private Label labelTitulo = new Label("Catálogo de produtos");
     private Button buttonComprar = new Button("Comprar");
     private Button buttonCadastrarOutro = new Button("Cadastrar outro");
 
@@ -52,10 +52,13 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
     public CatalogoBoundary() throws FileNotFoundException {
 
-        pane.getChildren().addAll(labelInfo, tableViewProducts, imageView);
+        pane.getChildren().addAll(labelInfo, labelTitulo, tableViewProducts, imageView);
 
         labelInfo.relocate(100, 232);
         labelInfo.setFont(Font.font(11));
+
+        labelTitulo.relocate(176, 50);
+        labelTitulo.setFont(Font.font(20));
 
         imageView.relocate(115, 269);
         imageView.resize(48, 48);
@@ -84,7 +87,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
         this.usuarioLogado = usuarioLogado;
 
-        if(this.usuarioLogado.getEmail().equals("admin@admin.com")) {
+        if (this.usuarioLogado.getEmail().equals("admin@admin.com")) {
             pane.getChildren().remove(buttonCadastrarOutro);
             pane.getChildren().add(buttonCadastrarOutro);
         } else {
@@ -95,7 +98,11 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         try {
             roupas = roupaControl.carregarRoupasView();
         } catch (RoupaException e) {
-            new Alert(Alert.AlertType.ERROR, "Erro ao se cadastrar!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Ocorreu um erro!");
+            alert.setContentText("Erro ao carregar roupas!");
+            alert.showAndWait();
             e.printStackTrace();
         }
 
@@ -113,10 +120,15 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         roupaSelecionada.setId(tableViewProducts.getSelectionModel().getFocusedIndex() + 1);
         try {
             roupaSelecionada = roupaControl.carregarRoupa(roupaSelecionada);
+            LoginBoundary.setRoupaSelecionada(roupaSelecionada);
+            this.assinanteComando.executarComando(comando);
         } catch (RoupaException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Ocorreu um erro!");
+            alert.setContentText("Erro ao selecionar roupa!");
+            alert.showAndWait();
             e.printStackTrace();
         }
-        LoginBoundary.setRoupaSelecionada(roupaSelecionada);
-        this.assinanteComando.executarComando(comando);
     }
 }
