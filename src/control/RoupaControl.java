@@ -19,15 +19,15 @@ import java.util.List;
 
 public class RoupaControl {
 
-    private StringProperty tamanhoProperty = new SimpleStringProperty("M");
-    private StringProperty tecidoProperty = new SimpleStringProperty("Fibra de soja");
-    private StringProperty sexoProperty = new SimpleStringProperty("Feminino");
-    private IntegerProperty quantidadeProperty = new SimpleIntegerProperty(100);
-    private StringProperty marcaProperty = new SimpleStringProperty("Lacoste");
-    private StringProperty modeloProperty = new SimpleStringProperty("Camisa sustentavel");
-    private StringProperty corProperty = new SimpleStringProperty("Vermelho");
-    private StringProperty descricaoProperty = new SimpleStringProperty("Uma bela camisa, bastante confortavel");
-    private DoubleProperty valorProperty = new SimpleDoubleProperty(100.00);
+    private StringProperty tamanhoProperty = new SimpleStringProperty();
+    private StringProperty tecidoProperty = new SimpleStringProperty();
+    private StringProperty sexoProperty = new SimpleStringProperty();
+    private IntegerProperty quantidadeProperty = new SimpleIntegerProperty();
+    private StringProperty marcaProperty = new SimpleStringProperty();
+    private StringProperty modeloProperty = new SimpleStringProperty();
+    private StringProperty corProperty = new SimpleStringProperty();
+    private StringProperty descricaoProperty = new SimpleStringProperty();
+    private DoubleProperty valorProperty = new SimpleDoubleProperty();
 
     private RoupaDAO roupaDAO = new RoupaDAOImpl();
 

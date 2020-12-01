@@ -12,11 +12,11 @@ import model.entity.Usuario;
 
 public class EnderecoControl {
 
-    private StringProperty cepProperty = new SimpleStringProperty("58693874");
-    private StringProperty ruaProperty = new SimpleStringProperty("Rua dos Javeiros");
-    private IntegerProperty numeroProperty = new SimpleIntegerProperty(123);
-    private StringProperty complementoProperty = new SimpleStringProperty("Portao em formato de xicara");
-    private StringProperty referenciaProperty = new SimpleStringProperty("Perto do Kotlin");
+    private StringProperty cepProperty = new SimpleStringProperty();
+    private StringProperty ruaProperty = new SimpleStringProperty();
+    private IntegerProperty numeroProperty = new SimpleIntegerProperty();
+    private StringProperty complementoProperty = new SimpleStringProperty();
+    private StringProperty referenciaProperty = new SimpleStringProperty();
 
     EnderecoDAO enderecoDAO = new EnderecoDAOImpl();
 

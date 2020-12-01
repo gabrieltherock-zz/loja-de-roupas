@@ -9,11 +9,11 @@ import model.entity.Usuario;
 
 public class UsuarioControl {
 
-    private StringProperty nomeProperty = new SimpleStringProperty("Antônio");
-    private StringProperty cpfProperty = new SimpleStringProperty("63268752989");
-    private StringProperty emailProperty = new SimpleStringProperty("antonio@gmail.com");
-    private StringProperty senhaProperty = new SimpleStringProperty("123456");
-    private StringProperty telefoneProperty = new SimpleStringProperty("11965744387");
+    private StringProperty nomeProperty = new SimpleStringProperty();
+    private StringProperty cpfProperty = new SimpleStringProperty();
+    private StringProperty emailProperty = new SimpleStringProperty();
+    private StringProperty senhaProperty = new SimpleStringProperty();
+    private StringProperty telefoneProperty = new SimpleStringProperty();
 
     private UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 

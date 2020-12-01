@@ -150,6 +150,8 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
 
     @Override
     public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
+        textFieldQuantidade.setText("");
+        textFieldValor.setText("");
         return pane;
     }
 
