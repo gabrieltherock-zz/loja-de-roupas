@@ -151,7 +151,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
     @Override
     public void acionarComando(String comando) {
-        if (!tableViewProducts.getItems().isEmpty()) {
+        if (tableViewProducts.getSelectionModel().getSelectedItem() != null) {
             roupaSelecionada.setId(tableViewProducts.getSelectionModel().getSelectedItem().getId());
             try {
                 roupaSelecionada = roupaControl.carregarRoupa(roupaSelecionada);
@@ -164,7 +164,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
                 alert.showAndWait();
                 e.printStackTrace();
             }
+            this.assinanteComando.executarComando(comando);
         }
-        this.assinanteComando.executarComando(comando);
     }
 }

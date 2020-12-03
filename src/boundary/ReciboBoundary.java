@@ -81,7 +81,7 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
 
     private void carregarDetalhes() {
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        textAreaDetalhes.setText("Código da compra: " + reciboGerado.getCompra().getId() +
+        textAreaDetalhes.setText("Id da compra: " + reciboGerado.getCompra().getId() +
                 "\nNome do comprador: " + usuarioLogado.getNome() +
                 "\nCPF do comprador: " + usuarioLogado.getCpf().replaceAll("([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})","$1\\.$2\\.$3-$4") +
                 "\nEndereço de entrega: " + enderecoEntrega.getRua() + ", número " + enderecoEntrega.getNumero() +

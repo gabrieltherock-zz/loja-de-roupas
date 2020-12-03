@@ -163,7 +163,12 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
     @Override
     public void acionarComando(String comando) {
         try {
-            roupaControl.salvarRoupa();
+            Roupa roupa = roupaControl.salvarRoupa();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Sucesso");
+            alert.setHeaderText("Deu tudo certo!");
+            alert.setContentText("A roupa de id " + roupa.getId() + " foi cadastrada com sucesso!");
+            alert.showAndWait();
             this.assinanteComando.executarComando(comando);
         } catch (RoupaException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
