@@ -71,6 +71,10 @@ public class RoupaControl {
         return roupaDAO.salvarRoupa(getRoupa());
     }
 
+    public long deletarRoupa(Roupa roupa) throws RoupaException {
+        return roupaDAO.deletarRoupa(roupa);
+    }
+
     public Roupa descontaEstoque(Roupa roupa) throws RoupaException {
         return roupaDAO.atualizarRoupa(roupa);
     }

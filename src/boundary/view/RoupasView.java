@@ -10,10 +10,20 @@ public class RoupasView {
 
     private final SimpleStringProperty preco;
 
+    private long id;
+
     public RoupasView(String modelo, String marca, String preco) {
         this.modelo = new SimpleStringProperty(modelo);
         this.marca = new SimpleStringProperty(marca);
         this.preco = new SimpleStringProperty(preco);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getModelo() {

@@ -15,4 +15,6 @@ public interface RoupaDAO {
     Roupa salvarRoupa(Roupa roupa) throws RoupaException;
 
     Roupa atualizarRoupa(Roupa roupa) throws RoupaException;
+
+    long deletarRoupa(Roupa roupa) throws RoupaException;
 }

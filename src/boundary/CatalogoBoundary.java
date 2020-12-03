@@ -37,6 +37,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     private Label labelTitulo = new Label("Catálogo de produtos");
     private Button buttonComprar = new Button("Comprar");
     private Button buttonCadastrarOutro = new Button("Cadastrar outro");
+    private Button buttonRemover = new Button("Excluir");
 
     private TableView<RoupasView> tableViewProducts = new TableView();
     private TableColumn tableColumnModelo = new TableColumn("Modelo");
@@ -69,10 +70,15 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         buttonComprar.setOnAction(e -> this.acionarComando("comprar"));
         buttonComprar.setStyle("-fx-background-color: white");
 
-        buttonCadastrarOutro.relocate(223, 264);
-        buttonCadastrarOutro.setPrefSize(192, 58);
-        buttonCadastrarOutro.setOnAction(e -> this.acionarComando("acessar cadastro de produto"));
+        buttonRemover.relocate(78, 264);
+        buttonRemover.setPrefSize(116, 58);
+        buttonRemover.setStyle("-fx-background-color: white");
+        buttonRemover.setOnAction(e -> deletarRoupa());
+
+        buttonCadastrarOutro.relocate(306, 264);
+        buttonCadastrarOutro.setPrefSize(156, 58);
         buttonCadastrarOutro.setStyle("-fx-background-color: white");
+        buttonCadastrarOutro.setOnAction(e -> this.acionarComando("acessar cadastro de produto"));
 
         tableViewProducts.setEditable(false);
         tableViewProducts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -86,13 +92,38 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         tableColumnPreco.setCellValueFactory(new PropertyValueFactory<RoupasView, String>("preco"));
     }
 
+    private void deletarRoupa() {
+        roupaSelecionada.setId(tableViewProducts.getSelectionModel().getSelectedItem().getId());
+        try {
+            long idDeletado = roupaControl.deletarRoupa(roupaSelecionada);
+            tableViewProducts.getItems().remove(tableViewProducts.getSelectionModel().getSelectedIndex());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Sucesso");
+            alert.setHeaderText("Deu tudo certo!");
+            alert.setContentText("A roupa de id " + idDeletado + " foi excluída com sucesso!");
+            alert.showAndWait();
+        } catch (RoupaException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Ocorreu um erro!");
+            alert.setContentText("Erro ao excluir a roupa!");
+            alert.showAndWait();
+            e.printStackTrace();
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public Pane getPane(Usuario usuarioLogado, Roupa roupaSelecionada, Compra compraRealizada, Endereco enderecoEntrega) {
         this.usuarioLogado = usuarioLogado;
 
         if (this.usuarioLogado.getEmail().equals("admin@admin.com")) {
+            pane.getChildren().remove(buttonRemover);
+            pane.getChildren().add(buttonRemover);
             pane.getChildren().remove(buttonCadastrarOutro);
             pane.getChildren().add(buttonCadastrarOutro);
+            imageView.relocate(226, 269);
         } else {
             pane.getChildren().remove(buttonComprar);
             pane.getChildren().add(buttonComprar);
@@ -120,18 +151,20 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
 
     @Override
     public void acionarComando(String comando) {
-        roupaSelecionada.setId(tableViewProducts.getSelectionModel().getFocusedIndex() + 1);
-        try {
-            roupaSelecionada = roupaControl.carregarRoupa(roupaSelecionada);
-            LoginBoundary.setRoupaSelecionada(roupaSelecionada);
-            this.assinanteComando.executarComando(comando);
-        } catch (RoupaException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText("Ocorreu um erro!");
-            alert.setContentText("Erro ao selecionar roupa!");
-            alert.showAndWait();
-            e.printStackTrace();
+        if (!tableViewProducts.getItems().isEmpty()) {
+            roupaSelecionada.setId(tableViewProducts.getSelectionModel().getSelectedItem().getId());
+            try {
+                roupaSelecionada = roupaControl.carregarRoupa(roupaSelecionada);
+                LoginBoundary.setRoupaSelecionada(roupaSelecionada);
+            } catch (RoupaException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erro");
+                alert.setHeaderText("Ocorreu um erro!");
+                alert.setContentText("Erro ao selecionar roupa!");
+                alert.showAndWait();
+                e.printStackTrace();
+            }
         }
+        this.assinanteComando.executarComando(comando);
     }
 }

@@ -4,70 +4,69 @@ use lojadb;
 ALTER DATABASE lojadb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 create table usuarios (
-	USUARIO_ID int auto_increment primary key,
-	NOME varchar(40) not null,
-	CPF varchar(11) not null,
-	EMAIL varchar(40) not null,
-	SENHA varchar(40) not null,
-	TELEFONE char(12) not null);
+                          USUARIO_ID int auto_increment primary key,
+                          NOME varchar(40) not null,
+                          CPF varchar(11) not null,
+                          EMAIL varchar(40) not null,
+                          SENHA varchar(40) not null,
+                          TELEFONE char(12) not null);
 
 create table enderecos (
-	ENDERECO_ID int auto_increment primary key,
-	USUARIO_ID int not null,
-	CEP varchar(8) not null,
-	RUA varchar(100) not null,
-	NUMERO int not null,
-	COMPLEMENTO varchar(100),
-	REFERENCIA varchar(100),
-	foreign key (USUARIO_ID) references usuarios(USUARIO_ID));
+                           ENDERECO_ID int auto_increment primary key,
+                           USUARIO_ID int not null,
+                           CEP varchar(8) not null,
+                           RUA varchar(100) not null,
+                           NUMERO int not null,
+                           COMPLEMENTO varchar(100),
+                           REFERENCIA varchar(100),
+                           foreign key (USUARIO_ID) references usuarios(USUARIO_ID));
 
 create table tamanhos (
-	TAMANHO_ID int auto_increment primary key,
-	TAMANHO varchar(2) not null);
+                          TAMANHO_ID int auto_increment primary key,
+                          TAMANHO varchar(2) not null);
 
 create table tecidos (
-	TECIDO_ID int auto_increment primary key,
-	TECIDO varchar(40) not null);
+                         TECIDO_ID int auto_increment primary key,
+                         TECIDO varchar(40) not null);
 
 create table sexos (
-	SEXO_ID int auto_increment primary key,
-	SEXO varchar(10) not null);
+                       SEXO_ID int auto_increment primary key,
+                       SEXO varchar(10) not null);
 
 create table roupas (
-	ROUPA_ID int auto_increment primary key,
-	TAMANHO_ID int not null,
-	TECIDO_ID int not null,
-	SEXO_ID int not null,
-	QUANTIDADE int not null,
-	MARCA varchar(20) not null,
-	MODELO varchar(40) not null,
-	COR varchar(20) not null,
-	DESCRICAO varchar(100) not null,
-	VALOR decimal(6,2) not null,
-	foreign key(TAMANHO_ID) references tamanhos(TAMANHO_ID),
-	foreign key(TECIDO_ID) references tecidos(TECIDO_ID),
-	foreign key(SEXO_ID) references sexos(SEXO_ID));
+                        ROUPA_ID int auto_increment primary key,
+                        TAMANHO_ID int not null,
+                        TECIDO_ID int not null,
+                        SEXO_ID int not null,
+                        QUANTIDADE int not null,
+                        MARCA varchar(20) not null,
+                        MODELO varchar(40) not null,
+                        COR varchar(20) not null,
+                        DESCRICAO varchar(100) not null,
+                        VALOR decimal(6,2) not null,
+                        foreign key(TAMANHO_ID) references tamanhos(TAMANHO_ID),
+                        foreign key(TECIDO_ID) references tecidos(TECIDO_ID),
+                        foreign key(SEXO_ID) references sexos(SEXO_ID));
 
 create table pagamentos (
-	PAGAMENTO_ID int auto_increment primary key,
-	PAGAMENTO varchar(10) not null);
+                            PAGAMENTO_ID int auto_increment primary key,
+                            PAGAMENTO varchar(10) not null);
 
 create table compras (
-	COMPRA_ID int auto_increment primary key,
-	USUARIO_ID int not null,
-	ROUPA_ID int not null,
-	PAGAMENTO_ID int not null,
-	QUANTIDADE int not null,
-	TOTAL decimal(6, 2) not null,
-	foreign key(USUARIO_ID) references usuarios(USUARIO_ID),
-	foreign key(ROUPA_ID) references roupas(ROUPA_ID),
-	foreign key(PAGAMENTO_ID) references pagamentos(PAGAMENTO_ID));
+                         COMPRA_ID int auto_increment primary key,
+                         USUARIO_ID int not null,
+                         ROUPA_ID int not null,
+                         PAGAMENTO_ID int not null,
+                         QUANTIDADE int not null,
+                         TOTAL decimal(6, 2) not null,
+                         foreign key(USUARIO_ID) references usuarios(USUARIO_ID),
+                         foreign key(PAGAMENTO_ID) references pagamentos(PAGAMENTO_ID));
 
 create table recibos (
-	RECIBO_ID int auto_increment primary key,
-	COMPRA_ID int,
-	DATA_COMPRA timestamp,
-	foreign key(COMPRA_ID) references compras(COMPRA_ID));
+                         RECIBO_ID int auto_increment primary key,
+                         COMPRA_ID int,
+                         DATA_COMPRA timestamp,
+                         foreign key(COMPRA_ID) references compras(COMPRA_ID));
 
 insert into usuarios (NOME, CPF, EMAIL, SENHA, TELEFONE) values
 ('ADMIN', '00000000000', 'admin@admin.com', 'admin', '00000000000'),

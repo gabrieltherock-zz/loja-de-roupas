@@ -26,14 +26,15 @@ public class RoupaDAOImpl implements RoupaDAO {
         List<RoupasView> roupas = new ArrayList<>();
         try {
             Connection con = ConnectionSingleton.instancia().connection();
-            String sql = "SELECT modelo, marca, valor FROM roupas";
+            String sql = "SELECT modelo, marca, valor, roupa_id FROM roupas";
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                RoupasView roupaControl = new RoupasView(rs.getString(1),
+                RoupasView roupaView = new RoupasView(rs.getString(1),
                         rs.getString(2),
                         NumberFormat.getCurrencyInstance().format(rs.getDouble(3)));
-                roupas.add(roupaControl);
+                roupaView.setId(rs.getLong(4));
+                roupas.add(roupaView);
             }
             con.close();
         } catch (SQLException e) {
@@ -112,5 +113,21 @@ public class RoupaDAOImpl implements RoupaDAO {
             throw new RoupaException(e);
         }
         return roupa;
+    }
+
+    @Override
+    public long deletarRoupa(Roupa roupa) throws RoupaException {
+        try {
+            Connection con = ConnectionSingleton.instancia().connection();
+            String sql = "DELETE FROM roupas WHERE roupa_id='" +
+                    roupa.getId() + "'";
+            PreparedStatement st = con.prepareStatement(sql);
+            st.executeUpdate(sql);
+            con.close();
+            return roupa.getId();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RoupaException(e);
+        }
     }
 }
