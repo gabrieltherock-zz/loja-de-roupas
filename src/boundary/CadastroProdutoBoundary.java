@@ -32,7 +32,7 @@ public class CadastroProdutoBoundary implements PaneStrategy, ProdutorComando{
     private Label labelMarca = new Label("Marca");
     private Label labelModelo = new Label("Modelo");
     private Label labelCor = new Label("Cor");
-    private Label labelDescricao = new Label("Decrição");
+    private Label labelDescricao = new Label("Descrição");
     private Label labelValor = new Label("Valor");
 
     private ComboBox<String> comboBoxTamanho = new ComboBox<>();
