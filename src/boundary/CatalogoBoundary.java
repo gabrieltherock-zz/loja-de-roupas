@@ -92,25 +92,26 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     }
 
     private void deletarRoupa() {
-        roupaSelecionada.setId(tableViewProducts.getSelectionModel().getSelectedItem().getId());
-        try {
-            long idDeletado = roupaControl.deletarRoupa(roupaSelecionada);
-            tableViewProducts.getItems().remove(tableViewProducts.getSelectionModel().getSelectedIndex());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Sucesso");
-            alert.setHeaderText("Deu tudo certo!");
-            alert.setContentText("A roupa de id " + idDeletado + " foi excluída com sucesso!");
-            alert.showAndWait();
-        } catch (RoupaException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText("Ocorreu um erro!");
-            alert.setContentText("Erro ao excluir a roupa!");
-            alert.showAndWait();
-            e.printStackTrace();
-            e.printStackTrace();
+        if (tableViewProducts.getSelectionModel().getSelectedItem() != null) {
+            roupaSelecionada.setId(tableViewProducts.getSelectionModel().getSelectedItem().getId());
+            try {
+                long idDeletado = roupaControl.deletarRoupa(roupaSelecionada);
+                tableViewProducts.getItems().remove(tableViewProducts.getSelectionModel().getSelectedIndex());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Sucesso");
+                alert.setHeaderText("Deu tudo certo!");
+                alert.setContentText("A roupa de id " + idDeletado + " foi excluída com sucesso!");
+                alert.showAndWait();
+            } catch (RoupaException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erro");
+                alert.setHeaderText("Ocorreu um erro!");
+                alert.setContentText("Erro ao excluir a roupa!");
+                alert.showAndWait();
+                e.printStackTrace();
+                e.printStackTrace();
+            }
         }
-
     }
 
     @Override
