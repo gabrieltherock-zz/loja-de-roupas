@@ -87,6 +87,8 @@ public class ReciboBoundary implements PaneStrategy, ProdutorComando {
                 "\nEndereço de entrega: " + enderecoEntrega.getRua() + ", número " + enderecoEntrega.getNumero() +
                 ", " + enderecoEntrega.getComplemento() +
                 "\nProduto comprado: " + reciboGerado.getCompra().getRoupa().getModelo() +
+                " " + reciboGerado.getCompra().getRoupa().getCor() +
+                " da marca " + reciboGerado.getCompra().getRoupa().getMarca() +
                 "\nData e hora da compra: " + fmt.format(reciboGerado.getData()) +
                 "\nQuantidade de itens comprados: " + reciboGerado.getCompra().getQuantidade() +
                 "\nForma de pagamento: " + reciboGerado.getCompra().getPagamento().getNome() +

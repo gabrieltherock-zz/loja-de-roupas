@@ -50,7 +50,7 @@ public class DetalhesBoundary implements PaneStrategy, ProdutorComando {
     }
 
     private void carregarDetalhes() {
-        textAreaDetalhes.setText("Id da compra: " + roupaSelecionada.getId() +
+        textAreaDetalhes.setText("Id da roupa: " + roupaSelecionada.getId() +
                 "\nModelo: " + roupaSelecionada.getModelo() +
                 "\nMarca: " + roupaSelecionada.getMarca() +
                 "\nSexo: " + roupaSelecionada.getSexo().getNome() +

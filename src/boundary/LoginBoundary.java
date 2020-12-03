@@ -130,10 +130,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
             try {
                 USUARIO_LOGADO = loginControl.verificar();
                 ENDERECO_ENTREGA = enderecoControl.encontrarEndereco(USUARIO_LOGADO);
-                if (USUARIO_LOGADO.getEmail().equals("admin@admin.com"))
-                    this.executarComando("acessar cadastro de produto");
-                else
-                    this.executarComando("acessar");
+                this.executarComando("acessar");
             } catch (LoginException | EnderecoException e) {
                 new Alert(Alert.AlertType.ERROR, "Erro ao fazer login!").show();
                 e.printStackTrace();

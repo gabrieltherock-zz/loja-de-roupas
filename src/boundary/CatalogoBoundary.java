@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import model.entity.Compra;
 import model.entity.Endereco;
 import model.entity.Roupa;
@@ -36,7 +35,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
     private Label labelInfo = new Label("Selecione um produto e clique no ícone abaixo para mostrar detalhes");
     private Label labelTitulo = new Label("Catálogo de produtos");
     private Button buttonComprar = new Button("Comprar");
-    private Button buttonCadastrarOutro = new Button("Cadastrar outro");
+    private Button buttonCadastrarProduto = new Button("Cadastrar produto");
     private Button buttonRemover = new Button("Excluir");
 
     private TableView<RoupasView> tableViewProducts = new TableView();
@@ -75,10 +74,10 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         buttonRemover.setStyle("-fx-background-color: white");
         buttonRemover.setOnAction(e -> deletarRoupa());
 
-        buttonCadastrarOutro.relocate(306, 264);
-        buttonCadastrarOutro.setPrefSize(156, 58);
-        buttonCadastrarOutro.setStyle("-fx-background-color: white");
-        buttonCadastrarOutro.setOnAction(e -> this.acionarComando("acessar cadastro de produto"));
+        buttonCadastrarProduto.relocate(306, 264);
+        buttonCadastrarProduto.setPrefSize(156, 58);
+        buttonCadastrarProduto.setStyle("-fx-background-color: white");
+        buttonCadastrarProduto.setOnAction(e -> this.acionarComando("acessar cadastro de produto"));
 
         tableViewProducts.setEditable(false);
         tableViewProducts.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -121,8 +120,8 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
         if (this.usuarioLogado.getEmail().equals("admin@admin.com")) {
             pane.getChildren().remove(buttonRemover);
             pane.getChildren().add(buttonRemover);
-            pane.getChildren().remove(buttonCadastrarOutro);
-            pane.getChildren().add(buttonCadastrarOutro);
+            pane.getChildren().remove(buttonCadastrarProduto);
+            pane.getChildren().add(buttonCadastrarProduto);
             imageView.relocate(226, 269);
         } else {
             pane.getChildren().remove(buttonComprar);
@@ -164,7 +163,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
                 alert.showAndWait();
                 e.printStackTrace();
             }
-            this.assinanteComando.executarComando(comando);
         }
+        this.assinanteComando.executarComando(comando);
     }
 }
