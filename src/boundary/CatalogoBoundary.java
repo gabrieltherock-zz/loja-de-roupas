@@ -155,6 +155,7 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
             try {
                 roupaSelecionada = roupaControl.carregarRoupa(roupaSelecionada);
                 LoginBoundary.setRoupaSelecionada(roupaSelecionada);
+                this.assinanteComando.executarComando(comando);
             } catch (RoupaException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erro");
@@ -163,7 +164,10 @@ public class CatalogoBoundary implements PaneStrategy, ProdutorComando {
                 alert.showAndWait();
                 e.printStackTrace();
             }
+        } else if (comando.equals("acessar cadastro de produto")) {
+            this.assinanteComando.executarComando(comando);
+        } else {
+            this.assinanteComando.executarComando("voltar para catalogo");
         }
-        this.assinanteComando.executarComando(comando);
     }
 }
