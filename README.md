@@ -1,6 +1,8 @@
 # Loja de roupas
 
-Trabalho de faculdade no qual eu e meu grupo (@RodrigoLimaM e @karimems) fizemos um CRUD utilizando Java e o banco de dados MySQL.
+Trabalho de faculdade para a disciplina de Programação Orientada a Objetos no qual nosso grupo (@RodrigoLimaM, @karimems e eu) fez um CRUD utilizando Java e o banco de dados MySQL.
+
+A documentação também está inclusa nesse repositório.
 
 As telas foram feitas utilizando JavaFX. Antes de executá-lo, é necessário executar o arquivo .sql do repositório para criar o banco.
 
