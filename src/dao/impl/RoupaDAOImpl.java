@@ -10,6 +10,7 @@ import model.enums.Tamanho;
 import model.enums.Tecido;
 import singleton.ConnectionSingleton;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -101,11 +102,9 @@ public class RoupaDAOImpl implements RoupaDAO {
     public Roupa atualizarRoupa(Roupa roupa) throws RoupaException {
         try {
             Connection con = ConnectionSingleton.instancia().connection();
-            String sql = "UPDATE roupas SET quantidade=(quantidade - (SELECT quantidade from compras " +
-                    "WHERE compra_id = (SELECT MAX(compra_id) FROM compras))) WHERE roupa_id=" +
-                    roupa.getId();
-            PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            st.executeUpdate();
+            CallableStatement callableStatement = con.prepareCall("{CALL atualiza_roupa(?)}");
+            callableStatement.setLong(1, roupa.getId());
+            callableStatement.executeUpdate();
             con.close();
             roupa = carregarRoupa(roupa);
         } catch (SQLException e) {
