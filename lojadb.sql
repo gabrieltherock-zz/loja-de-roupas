@@ -70,6 +70,8 @@ create table recibos (
 
 insert into usuarios (NOME, CPF, EMAIL, SENHA, TELEFONE) values
 ('ADMIN', '00000000000', 'admin@admin.com', 'admin', '00000000000'),
+('CAIQUE', '11111111111', 'caique@gmail.com', '123', '11924117687'),
+('ERICK', '22222222222', 'erick@gmail.com', '123', '11924117687'),
 ('GABRIEL', '78912345610', 'gabriel@gmail.com', '123', '11976887687'),
 ('KARINE', '85589345610', 'karine@gmail.com', '123', '11996317687'),
 ('RODRIGO', '87742345610', 'rodrigo@gmail.com', '123', '11924117687');
