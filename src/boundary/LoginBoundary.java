@@ -76,7 +76,7 @@ public class LoginBoundary extends Application implements EventHandler<ActionEve
 
         Scene scene = new Scene(pane, 530, 400);
 
-        pane.setStyle("-fx-background-color:#4F59B5FF;");
+        pane.setStyle("-fx-background-color:#4FB564;");
 
         pane.getChildren().addAll(labelEmail, labelSenha,
                 textFieldEmail, passwordFieldSenha,
